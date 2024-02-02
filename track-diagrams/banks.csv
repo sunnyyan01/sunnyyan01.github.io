@@ -1,0 +1,13 @@
+10.266,DB,track,DB,end=11.625,render_pos=100,direction=down,label=Down Bankstown
+10.266,UB,track,UB,end=11.625,render_pos=200,direction=up,label=Up Bankstown
+10.266,DB,signal,SM 197 B
+10.360,DB,speed,S10.360,gen=65
+10.643,UB,signal,SM 200 B
+10.682,DB,signal,SM 201 B
+11.067,UB,signal,SM 204 B
+11.240,DB,signal,SM 205 B,absolute,shunt_route_ind=DB|UB,subsidiary,turnout
+11.270,UB,points,P261,b_end=11.358,b_track=DB,style=uncommissioned
+11.340,DB,speed,S11.340,genX=50,xAppliesTo=P262
+11.380,DB,points,P262,b_end=11.468,b_track=UB
+11.601,UB,signal,SM 210 IND,dwarf,upper_lamps=GYRY,ind=SM 210 B
+11.625,UB,signal,SM 210 B,absolute,upper_lamps=G_R,subsidiary
