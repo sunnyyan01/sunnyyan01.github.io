@@ -143,14 +143,18 @@ div.uncommissioned {
     background-color: lime;
 }
 
+.speed-sign-display {
+    display: inline-flex;
+    flex-direction: column;
+}
 .speed-sign {
-    display: inline-block;
-
+    display: flex;
+    box-shadow: 1px 1px;
+    padding: 7px;
+    
     font-family: sans-serif;
     font-size: 48px;
     color: black;
-
-    padding: 7px;
 }
 .speed-sign.yellow {
     background-color: #FFDE00;
@@ -172,11 +176,9 @@ div.uncommissioned {
 .speed-sign.x::before {
     content: "X";
 }
-.speed-sign.mu::after {
+.speed-sign span.mu {
     content: "MU";
     writing-mode: vertical-lr;
+    text-orientation: upright;
     font-size: 24px;
-    position: relative;
-    left: -1em;
-    top: -24px;
 }

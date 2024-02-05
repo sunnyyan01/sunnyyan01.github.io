@@ -54,10 +54,10 @@ let SIGN_TYPES = {
     "newMed": ["square", "blue"],
     "newHigh": ["square", "white"],
     "gen": ["arrow", "yellow"],
-    "mu": ["arrow", "white", "mu"],
+    "mu": ["arrow", "white"],
     "high": ["arrow", "white"],
     "genX": ["arrow", "yellow", "x"],
-    "muX": ["arrow", "white", "mu", "x"],
+    "muX": ["arrow", "white", "x"],
     "highX": ["arrow", "white", "x"],
 };
 function renderSpeedSign(e, object) {
@@ -67,8 +67,13 @@ function renderSpeedSign(e, object) {
         let sign = document.createElement("div");
         sign.classList.add("speed-sign", ...classes);
         sign.textContent = object[type];
+        if (type.includes("mu")) {
+            let mu = document.createElement("span");
+            mu.textContent = "MU";
+            mu.classList.add("mu");
+            sign.appendChild(mu);
+        }
         signs.push(sign);
-        console.log(sign);
     }
     speedSignDisplay.replaceChildren(...signs);
 }
@@ -173,7 +178,8 @@ function render(objects, from, to) {
 async function getCsv(name) {
     let resp = await fetch(name);
     let text = await resp.text();
-    let lines = text.trim().split("\r\n");
+    let newline = text.includes("\r") ? "\r\n" : "\n";
+    let lines = text.trim().split(newline);
     let objects = lines.map(line => line.split(","));
     return objects;
 }
