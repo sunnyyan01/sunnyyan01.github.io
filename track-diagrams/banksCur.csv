@@ -1,0 +1,60 @@
+5.600,DB,track,DB,end=13.000,render_pos=200,direction=down,label=Down Bankstown
+5.600,UB,track,UB,end=13.000,render_pos=300,direction=up,label=Up Bankstown
+5.750,UG,track,UG,end=5.800,render_pos=100,direction=up,label=Up Goods
+5.813,UB,signal,SM 678 B,absolute,lower_lamps=YR
+5.813,UB,signal,SM 678 IND,ground,upper_lamps=YR,position=right
+5.929,DB,signal,SM 155 B
+6.040,DB,speed,S6.040D,gen=70
+6.137,UB,signal,SM 680 B
+6.250,UB,speed,S6.250U,gen=40
+6.297,DB,signal,SM 157 B
+6.486,UB,signal,SM 158 B
+6.495,DB,platform,Marrickville P2,end=6.650,left
+6.495,UB,platform,Marrickville P1,end=6.650,left
+6.600,DG,track,DG,end=12.500,render_pos=400,direction=down,label=Down Goods
+6.600,UG,track,UG,end=12.500,render_pos=500,direction=up,label=Up Goods
+6.652,DB,signal,SM 159 B
+6.824,UB,signal,SM 160 B
+7.034,DB,signal,SM 163 B
+7.208,UB,signal,SM 166 B
+7.357,DB,signal,SM 167 B
+7.540,UB,speed,S7.540,gen=70
+7.676,DB,signal,SM 169 B
+7.750,DB,speed,S7.750,gen=60
+7.783,UB,signal,SM 170 B
+7.785,DB,platform,Dulwich Hill P2,end=7.955,right
+7.785,UB,platform,Dulwich Hill P1,end=7.955,right
+7.959,DB,signal,SM 171 IND,ground,coact=SM 171 B
+7.960,DB,signal,SM 171 B,note=Coact needed due to poor visibility from 8 car stop
+8.103,UB,signal,SM 172 B
+8.207,DB,signal,SM 173 B
+8.402,UB,signal,SM 174 B
+8.594,DB,signal,SM 175 B
+8.715,UB,signal,176 REPEATER,ground,coact=SM 176 B
+8.721,UB,signal,SM 176 B,note=Coact needed due to poor visibility from 8 car stop
+8.721,DB,platform,Hurlstone Park P2,end=8.895,left
+8.721,UB,platform,Hurlstone Park P1,end=8.895,left
+8.899,DB,signal,SM 177 B
+9.001,UB,signal,SM 180 B
+9.233,UB,signal,SM 182 B
+9.403,DB,signal,SM 185 B
+9.591,UB,signal,SM 188 B
+9.814,DB,signal,SM 191 B
+10.020,UB,speed,S10.020,gen=60
+10.087,UB,signal,SM 194 INDR,ground,coact=SM 194 B
+10.088,UB,signal,SM 194 B,note=Coact needed due to poor visibility from 8 car stop
+10.088,DB,platform,Canterbury P2,end=10.262,left
+10.088,UB,platform,Canterbury P1,end=10.262,left
+10.266,DB,signal,SM 197 B
+10.360,DB,speed,S10.360,gen=65
+10.643,UB,signal,SM 200 B
+10.682,DB,signal,SM 201 B
+11.067,UB,signal,SM 204 B
+11.240,DB,signal,SM 205 B,absolute,shunt_route_ind=DB|UB,subsidiary,turnout
+11.270,UB,points,P261,b_end=11.358,b_track=DB,style=uncommissioned
+11.340,DB,speed,S11.340,genX=50,muX=50,xAppliesTo=P262
+11.380,DB,points,P262,b_end=11.468,b_track=UB
+11.601,UB,signal,SM 210 IND,ground,upper_lamps=GYRY,coact=SM 210 B
+11.608,UB,signal,SM 210 B,absolute,upper_lamps=G_R,subsidiary,note=Coact needed due to poor visibility from 8 car stop
+11.605,DB,platform,Campsie P2,end=11.790,left
+11.605,UB,platform,Campsie P1,end=11.790,left

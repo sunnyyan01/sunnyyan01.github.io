@@ -13,6 +13,7 @@ body > * {
 
 #render-area {
     position: relative;
+    overflow-x: scroll;
 }
 #render-area > div {
     position: absolute;
@@ -51,8 +52,18 @@ div.points {
     transform-origin: 0 0;
 }
 div.platform {
-    height: 50px;
+    display: flex;
+    justify-content: center;
+    height: 40px;
     background-color: rgba(255, 68, 0, 0.7);
+}
+div.platform[data-facing=up] {
+    transform: translate(0px, 15px);
+    align-items: flex-start;
+}
+div.platform[data-facing=down] {
+    transform: translate(0px, -45px);
+    align-items: flex-end;
 }
 
 div.uncommissioned {
@@ -60,10 +71,14 @@ div.uncommissioned {
 }
 
 
-.direction-guide {
+.controls {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+.controls p {
+    color: #00FA;
+    font-weight: bold;
 }
 
 .infobox-section {
@@ -83,7 +98,7 @@ div.uncommissioned {
     background-repeat: no-repeat;
     padding-bottom: 100px;
 }
-.signal-display[data-dwarf=true] {
+.signal-display[data-ground=true] {
     background: none;
     padding-bottom: 0px;
 }
@@ -147,38 +162,6 @@ div.uncommissioned {
     display: inline-flex;
     flex-direction: column;
 }
-.speed-sign {
-    display: flex;
-    box-shadow: 1px 1px;
-    padding: 7px;
-    
-    font-family: sans-serif;
-    font-size: 48px;
-    color: black;
-}
-.speed-sign.yellow {
-    background-color: #FFDE00;
-}
-.speed-sign.med {
-    background-color: #0C4CA1;
-    color: white;
-}
-.speed-sign.white {
-    background-color: white;
-}
-.speed-sign.square {
-    border: 1px solid black;
-    border-radius: 10px;
-}
-.speed-sign.med.square {
-    border: 1px solid white;
-}
-.speed-sign.x::before {
-    content: "X";
-}
-.speed-sign span.mu {
-    content: "MU";
-    writing-mode: vertical-lr;
-    text-orientation: upright;
-    font-size: 24px;
+.speed-sign-display svg {
+    margin: 5px 0px;
 }

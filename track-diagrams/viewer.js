@@ -18,13 +18,20 @@ function renderLamps(str) {
 }
 let signalDisp = null;
 function renderSignal(e, object) {
-    signalDisp.dataset.dwarf = !!(object.dwarf);
+    signalDisp.dataset.dwarf = object.dwarf || object.ground;
+    signalDisp.dataset.ground = object.ground;
 
     // Upper Head
-    let upperStr = (
-        object.upper_lamps ||
-        (object.turnout ? "GYR" : "GR")
-    );
+    let upperStr;
+    if (object.upper_lamps) {
+        upperStr = object.upper_lamps;
+    } else if (object.shunt) {
+        upperStr = "RYR";
+    } else if (object.turnout || object.ground) {
+        upperStr = "GYR";
+    } else {
+        upperStr = "GR";
+    }
     signalDisp.children[0].replaceChildren(
         ...renderLamps(upperStr)
     );
@@ -34,7 +41,7 @@ function renderSignal(e, object) {
         (object.lower_lamps || "GYR") +
         (object.low_speed ? "g" : "")
     );
-    if (object.dwarf && !object.lower_lamps)
+    if (object.ground && !object.lower_lamps)
         lowerStr = "";
     signalDisp.children[1].replaceChildren(
         ...renderLamps(lowerStr)
@@ -60,19 +67,57 @@ let SIGN_TYPES = {
     "muX": ["arrow", "white", "x"],
     "highX": ["arrow", "white", "x"],
 };
+SVG_NS = "http://www.w3.org/2000/svg"
 function renderSpeedSign(e, object) {
     let signs = [];
     for (let [type, classes] of Object.entries(SIGN_TYPES)) {
-        if (!object[type]) continue;
-        let sign = document.createElement("div");
-        sign.classList.add("speed-sign", ...classes);
-        sign.textContent = object[type];
+        let speed = object[type];
+        if (!speed) continue;
+
+        let width = (speed.length == 2 ? 55 : 77);
+        if (type.includes("new"))
+            width += 14;
+        else
+            width += 25 + 7;
+        if (type.includes("X")) width += 27;
+        if (type.includes("mu")) width += 27;
+
+        let sign = document.createElementNS(SVG_NS, "svg");
+        sign.setAttribute("width", width);
+        sign.setAttribute("height", 62);
+
+        let bg = document.createElementNS(SVG_NS, "polygon");
+        let bgPoints = type.includes("new") ? "0,0 74,0 74,62 0,62" : `0,31 25,0 ${width},0 ${width},62 25,62`;
+        bg.setAttribute("points", bgPoints);
+        let bgColor = (
+            type.includes("gen") ? "#FFDE00" :
+            (type.includes("med") ? "#0C4CA1" :
+            "white")
+        );
+        bg.setAttribute("fill", bgColor);
+        bg.setAttribute("stroke", "black");
+        sign.appendChild(bg);
+
+        let speedText = document.createElementNS(SVG_NS, "text");
+        speedText.textContent = (type.includes("X") ? "X" : "") + speed;
+        speedText.setAttribute("x", type.includes("new") ? 37 : (width - 32) / 2 + 25);
+        speedText.setAttribute("y", 50);
+        speedText.setAttribute("font-size", "48px");
+        speedText.setAttribute("text-anchor", "middle");
+
         if (type.includes("mu")) {
-            let mu = document.createElement("span");
+            let mu = document.createElementNS(SVG_NS, "tspan");
             mu.textContent = "MU";
-            mu.classList.add("mu");
-            sign.appendChild(mu);
+            mu.setAttribute("dx", -27);
+            mu.setAttribute("dy", -22);
+            mu.setAttribute("font-size", "24px");
+            mu.style.writingMode = "tb";
+            mu.style.textOrientation = "upright";
+            speedText.appendChild(mu);
         }
+
+        sign.appendChild(speedText);
+
         signs.push(sign);
     }
     speedSignDisplay.replaceChildren(...signs);
@@ -87,7 +132,10 @@ function handleClick(e, object) {
         nameDisp.textContent = `Signal ${object.id}`;
         renderSignal(e, object);
     } else if (object.type == "speed") {
+        nameDisp.textContent = "";
         renderSpeedSign(e, object);
+    } else if (object.type == "track") {
+        nameDisp.textContent = object.label || object.id;
     }
 }
 
@@ -100,9 +148,11 @@ function parseParams(params) {
     return out;
 }
 
-function render(objects, from, to) {
+function render(objects, scale) {
     let renderArea = document.getElementById("render-area");
-    let scale = window.innerWidth / (to - from) * 0.9;
+    renderArea.replaceChildren();
+    let lineStart = -1;
+    let maxHeight = 0;
     let trackInfo = {};
 
     for (let object of objects) {
@@ -111,17 +161,21 @@ function render(objects, from, to) {
         params = parseParams(params);
         if (type === "track") {
             trackInfo[id] = params;
+            if (maxHeight < params.render_pos)
+                maxHeight = parseInt(params.render_pos);
         }
+
+        if (lineStart == -1) lineStart = km;
 
         let element = document.createElement("div");
         element.id = id;
         element.className = type;
-        element.style.left = (km - from) * scale + "px";
+        element.style.left = (km - lineStart) * scale + "px";
         element.style.top = trackInfo[track].render_pos + "px";
         element.title = params.label || element.id;
 
         if (type == "signal" || type == "speed") {
-            let facing = trackInfo[track].direction || params.facing;
+            let facing = params.facing || trackInfo[track].direction;
 
             let offset = facing == "up" ? 20 : -20;
             if (params.position == "right") {
@@ -144,35 +198,35 @@ function render(objects, from, to) {
         if (type == "points") {
             let horizLen = (params.b_end - km) * scale;
             let vertLen = trackInfo[params.b_track].render_pos - trackInfo[track].render_pos;
-            vertLen += vertLen > 0 ? 20 : -20;
             let diagLen = Math.sqrt(horizLen * horizLen + vertLen * vertLen);
-            console.log(horizLen, vertLen, diagLen);
             element.style.width = diagLen + "px";
 
-            let angle = Math.atan2(vertLen, diagLen);
+            let angle = Math.atan2(vertLen, horizLen);
             element.style.transform = `rotate(${angle}rad)`;
         }
         
         if (type == "platform") {
+            element.textContent = id;
+
             let direction = trackInfo[track].direction;
             if (
                 (params.left && direction == "up") ||
                 (params.right && direction == "down")
             ) {
-                element.style.transform = `translate(0px, 15px)`;
+                element.dataset.facing = "up";
             } else {
-                element.style.transform = `translate(0px, -55px)`;
+                element.dataset.facing = "down";
             }
         }
 
         element.addEventListener(
-            "click", e => handleClick(e, {km, track, type, id, ...params})
+            "mouseover", e => handleClick(e, {km, track, type, id, ...params})
         );
 
         renderArea.appendChild(element);
     }
 
-    renderArea.style.height = "300px";
+    renderArea.style.height = maxHeight + 100 + "px";
 }
 
 async function getCsv(name) {
@@ -184,8 +238,15 @@ async function getCsv(name) {
     return objects;
 }
 
-window.addEventListener("load", async e => {
-    render(await getCsv("banks.csv"), 10.266, 11.790);
+let lineSelector = null;
+async function changeLine() {
+    let line = await getCsv(lineSelector.value);
+    render(line, 1600);
+}
+
+window.addEventListener("load", e => {
+    lineSelector = document.getElementById("line-selector");
+    changeLine()
 
     nameDisp = document.getElementById("name-display");
     infobox = document.getElementById("infobox");

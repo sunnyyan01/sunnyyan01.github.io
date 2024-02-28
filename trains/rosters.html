@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sydney Trains | Suburban Train Rosters</title>
+    <script src="rosters.js"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        div.tables {
+            display: flex;
+            flex-direction: row;
+        }
+
+        td, th {
+            padding: 5px;
+            border: 1px solid grey;
+        }
+        td {
+            text-align: right;
+        }
+        table {
+            box-sizing: border-box;
+            margin: 5px;
+            width: 50%;
+            caption-side: top;
+            height: fit-content;
+            border-collapse: collapse;
+        }
+        caption {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        table p {
+            margin: 0;
+            text-align: left;
+        }
+        table td[colspan=2] {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Suburban Train Rosters</h1>
+
+    <div class="tables">
+    <table class="roster-range-table">
+        <caption>Roster Ranges</caption>
+        <tr>
+            <th>Start</th>
+            <th>End</th>
+            <th>Weekday</th>
+            <th>Weekend</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>L1</td>
+            <td>L9</td>
+            <td>2</td>
+            <td>2</td>
+            <td>
+                <p>Olympic Park shuttles (range not tied to consist)</p>
+                <p>Currently 4M on weekdays and 8A on weekends</p>
+            </td>
+        </tr>
+        <tr>
+            <td>B1</td>
+            <td>B9</td>
+            <td colspan="2">Variable</td>
+            <td>
+                <p>Olympic Park &lt;-&gt; West Special Event Services</p>
+                <p>This range is also used by the shuttles above when travelling empty to Blacktown Yard</p>
+            </td>
+        </tr>
+        <tr>
+            <td>S1</td>
+            <td>S9</td>
+            <td colspan="2">Variable</td>
+            <td>
+                <p>Olympic Park &lt;-&gt; Sydney Terminal Special Event Services</p>
+            </td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>35</td>
+            <td>34</td>
+            <td>33</td>
+            <td>
+                <p>8 car B sets on City Circle Lines (T2/3/8)</p>
+                <p>Roster 19 (weekdays) is temporarily run by 8M</p>
+            </td>
+        </tr>
+        <tr>
+            <td>37</td>
+            <td>49</td>
+            <td>13</td>
+            <td>0</td>
+            <td>
+                <p>8 car K sets on City Circle Lines (T2/3/8)</p>
+                <p>Roster 37 (weekdays) may be 8M</p>
+            </td>
+        </tr>
+        <tr>
+            <td>50</td>
+            <td>59</td>
+            <td>6</td>
+            <td>4</td>
+            <td><p>4 car M sets on Cumberland Line (T5)</p></td>
+        </tr>
+        <tr>
+            <td>60</td>
+            <td>70</td>
+            <td>11</td>
+            <td>0</td>
+            <td>
+                <p>8 car M sets on City Circle Lines (T2/3/8)</p>
+                <p>Roster 60 (weekdays) may be 8K</p>
+                <p>Roster 67 (weekdays) is temporarily run by 8K</p>
+            </td>
+        </tr>
+        <tr>
+            <td>71</td>
+            <td>75</td>
+            <td>0</td>
+            <td>2</td>
+            <td>
+                <p>8 car T sets on City Circle Lines (T2/3/8)</p>
+                <p>Weekends only, to maintain crew qualifications</p>
+            </td>
+        </tr>
+        <tr>
+            <td>76</td>
+            <td>99</td>
+            <td>18</td>
+            <td>12</td>
+            <td>
+                <p>8 car A sets on City Circle Lines (T2/3/8)</p>
+                <p>Rosters 98-99 (weekdays) temporarily run by 8T</p>
+            </td>
+        </tr>
+        <tr>
+            <td>101</td>
+            <td>119</td>
+            <td>12</td>
+            <td>8</td>
+            <td>
+                <p>8 car T sets on Sector 3 (T1/9)</p>
+                <p>Rosters 102, 107 (weekdays) temporarily run by 8A</p>
+                <p>Roster 101 (weekends) temporarily run by 8B</p>
+            </td>
+        </tr>
+        <tr>
+            <td>120</td>
+            <td>179</td>
+            <td>53</td>
+            <td>40</td>
+            <td>
+                <p>8 car A sets on Sector 3 (T1/9)</p>
+                <p>Roster 122 (weekdays) temporarily run by 8B</p>
+            </td>
+        </tr>
+        <tr>
+            <td>190</td>
+            <td>193</td>
+            <td>4</td>
+            <td>0</td>
+            <td><p>8 car B sets on Sector 3 (T1/9)</p></td>
+        </tr>
+        <tr>
+            <td>200</td>
+            <td>259</td>
+            <td>12</td>
+            <td>14</td>
+            <td>
+                <p>4 car H sets on Central Coast Line</p>
+            </td>
+        </tr>
+        <tr>
+            <td>280</td>
+            <td>299</td>
+            <td>12</td>
+            <td>11</td>
+            <td>
+                <p>8 car H sets on Central Coast Line</p>
+            </td>
+        </tr>
+        <tr>
+            <td>300</td>
+            <td>399</td>
+            <td>12</td>
+            <td>??</td>
+            <td>
+                <p>T or H sets on South Coast Line (between Sydney and Wollongong or Port Kembla)</p>
+            </td>
+        </tr>
+        <tr>
+            <td>400</td>
+            <td>499</td>
+            <td>17</td>
+            <td>??</td>
+            <td>
+                <p>H sets on South Coast Line (between Sydney and Dapto or Kiama)</p>
+            </td>
+        </tr>
+        <tr>
+            <td>500</td>
+            <td>599</td>
+            <td>10</td>
+            <td>17</td>
+            <td>
+                <p>8 car A or B sets on Cumberland Line (T5)</p>
+                <p>Formed off rosters 1-199 during offpeak hours</p>
+            </td>
+        </tr>
+        <tr>
+            <td>600</td>
+            <td>699</td>
+            <td>39</td>
+            <td>??</td>
+            <td>
+                <p>8 car T sets on Illawara Line (T4)</p>
+                <p>Number excludes 641/642 (used for shunting)</p>
+            </td>
+        </tr>
+        <tr>
+            <td>700</td>
+            <td>899</td>
+            <td colspan="2">Variable</td>
+            <td>
+                <p>Used for rosters 1-199 altered by trackwork</p>
+            </td>
+        </tr>
+    </table>
+
+
+    <table class="utilisation-table">
+        <caption>Utilisation</caption>
+        <tr class="header">
+            <th rowspan="2">Class</th>
+            <th rowspan="2">Cars per set</th>
+            <th rowspan="2">Sets in fleet</th>
+            <th colspan="3">Weekday</th>
+            <th colspan="3">Weekend</th>
+        </tr>
+        <tr class="header">
+            <th colspan="2">Sets rostered</th>
+            <th>Utilisation</th>
+            <th colspan="2">Sets rostered</th>
+            <th>Utilisation</th>
+        </tr>
+        <tr>
+            <td>A</td>
+            <td>8</td>
+            <td>78</td>
+            <td>18 + 53</td>
+            <td>71</td>
+            <td class="util-calc" data-rostered="4" data-fleet="2"></td>
+            <td>12 + 40 + 2</td>
+            <td>54</td>
+            <td class="util-calc" data-rostered="7" data-fleet="2"></td>
+        </tr>
+        <tr>
+            <td>B</td>
+            <td>8</td>
+            <td>41</td>
+            <td>34 + 4</td>
+            <td>38</td>
+            <td class="util-calc" data-rostered="4" data-fleet="2"></td>
+            <td>33</td>
+            <td>33</td>
+            <td class="util-calc" data-rostered="7" data-fleet="2"></td>
+        </tr>
+        <tr>
+            <td>K</td>
+            <td>4</td>
+            <td>40</td>
+            <td>2*13</td>
+            <td>26</td>
+            <td class="util-calc" data-rostered="4" data-fleet="2"></td>
+            <td>0</td>
+            <td>0</td>
+            <td class="util-calc" data-rostered="7" data-fleet="2"></td>
+        </tr>
+        <tr>
+            <td>M</td>
+            <td>4</td>
+            <td>35</td>
+            <td>6 + 2 + 2*11</td>
+            <td>30</td>
+            <td class="util-calc" data-rostered="4" data-fleet="2"></td>
+            <td>4</td>
+            <td>4</td>
+            <td class="util-calc" data-rostered="7" data-fleet="2"></td>
+        </tr>
+        <tr>
+            <td>T</td>
+            <td>4</td>
+            <td>111</td>
+            <td>2*12 + 2*39</td>
+            <td>102</td>
+            <td class="util-calc" data-rostered="4" data-fleet="2"></td>
+            <td>2*2 + 2*8 + 2*??</td>
+            <td>??</td>
+            <td class="util-calc" data-rostered="7" data-fleet="2"></td>
+        </tr>
+    </table>
+    </div>
+
+    <h3>Caveats</h3>
+    <ul>
+        <li>Based on GTFS data for 2023-02-06 (weekday), 2023-02-10 (weekend), downloaded on 2023-02-05</li>
+        <li>"temporarily run by &lt;consist&gt;" simply means a train is rostered for a different consist to the numbers around it.
+            It is temporary in the sense that these typically change every few months.</li>
+        <li>"may be &lt;consist&gt;" means a different class of train takes over halfway through the day</li>
+        <li>No data is available for weekend T4 or South Coast rosters due to trackwork</li>
+    </ul>
+</body>
+</html>

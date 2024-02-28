@@ -11,9 +11,13 @@
 <div id="render-area">
 
 </div>
-<div class="direction-guide">
-    <span>← UP</span>
-    <span>DOWN →</span>
+<div class="controls">
+    <p>&lt; UP</p>
+    <select onChange="changeLine()" id="line-selector">
+        <option selected value="banksCur.csv">Bankstown Line (current)</option>
+        <option value="banks2011.csv">Bankstown Line (2013)</option>
+    </select>
+    <p>DOWN &gt;</p>
 </div>
 <div class="infobox" id="infobox">
     <h3 id="name-display"></h3>
