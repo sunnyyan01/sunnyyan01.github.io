@@ -1,0 +1,138 @@
+2144243 Auburn Station Platform 3 4
+['1', '60', '80', '82']
+
+202291 Bondi Junction Station Platform 1 1
+['621']
+
+202292 Bondi Junction Station Platform 2 1
+['628']
+
+2148531 Blacktown Station Platform 1 2
+['53', '54']
+
+2148532 Blacktown Station Platform 2 7
+['111', '160', '161', '164', '166', '167', '168']
+
+2148533 Blacktown Station Platform 3 1
+['55']
+
+2230212 Cronulla Station Platform 2 1
+['617']
+
+2560691 Campbelltown Station Platform 1 4
+['21', '45', '46', '47']
+
+2560692 Campbelltown Station Platform 2 1
+['6']
+
+2560693 Campbelltown Station Platform 3 4
+['14', '87', '88', '89']
+
+2560694 Campbelltown Station Platform 4 1
+['13']
+
+2750491 Emu Plains Station Platform 1 2
+['150', '153']
+
+2750492 Emu Plains Station Platform 2 2
+['148', '149']
+
+214061 Flemington Station Platform 1 8
+['137', '138', '191', '38', '66', '70', 'F1', 'F2']
+
+214063 Flemington Station Platform 3 1
+['11']
+
+207262 Gordon Station Platform 2 2
+['178', '180']
+
+2142324 Granville Station Platform 4 15
+['139', '140', '141', '142', '2', '3', '4', '5', '61', '62', '63', '64', '7', '81', '83']
+
+2077301 Hornsby Station Platform 1 13
+['101', '120', '122', '124', '128', '129', '130', '131', '132', '133', '134', '135', '136']
+
+2077302 Hornsby Station Platform 2 3
+['119', '125', '126']
+
+2077303 Hornsby Station Platform 3 8
+['102', '105', '121', '123', '127', '172', '190', '193']
+
+2220361 Hurstville Station Platform 1 1
+['642']
+
+2747361 Kingswood Station Platform 1 3
+['107', '109', '155']
+
+217934 Leppington Station Platform 1 2
+['52', '8']
+
+217935 Leppington Station Platform 2 16
+['22', '24', '25', '26', '27', '29', '30', '48', '49', '69', '90', '91', '92', '93', '94', '95']
+
+217937 Leppington Station Platform 4 2
+['50', '51']
+
+2170822 Liverpool Station Platform 2 2
+['31', '32']
+
+2170823 Liverpool Station Platform 3 2
+['96', '97']
+
+2560701 Leumeah Station Platform 1 3
+['16', '17', '19']
+
+2223291 Mortdale Station Platform 1 14
+['113', '114', '600', '601', '602', '603', '604', '605', '606', '607', '608', '609', '610', '622']
+
+2223292 Mortdale Station Platform 2 2
+['626', '641']
+
+2148542 Marayong Station Platform 2 4
+['110', '162', '163', '165']
+
+2060102 North Sydney Station Platform 2 1
+['145']
+
+2060103 North Sydney Station Platform 3 1
+['144']
+
+2127103 Olympic Park Station Platform 3 2
+['L1', 'L2']
+
+2750511 Penrith Station Platform 1 3
+['154', '158', '159']
+
+2750513 Penrith Station Platform 3 1
+['156']
+
+2015135 Redfern Station Platform 5 4
+['10', '33', '34', '99']
+
+2015137 Redfern Station Platform 7 1
+['98']
+
+2015139 Redfern Station Platform 9 3
+['106', '143', '43']
+
+2753671 Richmond Station Platform 1 1
+['169']
+
+2753672 Richmond Station Platform 2 1
+['171']
+
+2000321 Central Station Platform 1 1
+['627']
+
+2000325 Central Station Platform 5 1
+['624']
+
+2000327 Central Station Platform 7 1
+['625']
+
+2000329 Central Station Platform 9 1
+['623']
+
+2060112 Waverton Station Platform 2 2
+['146', '147']
+

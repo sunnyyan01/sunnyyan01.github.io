@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sydney Trains | Suburban Train Rosters</title>
-    <script src="rosters.js"></script>
+    <title>Sydney Trains | Timetable Analytics</title>
+    <script src="analytics.js"></script>
     <style>
         body {
             font-family: sans-serif;
@@ -39,6 +39,9 @@
         table td[colspan=2] {
             text-align: center;
         }
+        td.note {
+            text-decoration: gray underline dotted 2px;
+        }
     </style>
 </head>
 <body>
@@ -71,6 +74,14 @@
             <td>
                 <p>Olympic Park &lt;-&gt; West Special Event Services</p>
                 <p>This range is also used by the shuttles above when travelling empty to Blacktown Yard</p>
+            </td>
+        </tr>
+        <tr>
+            <td>F1</td>
+            <td>F9</td>
+            <td colspan="2">Variable</td>
+            <td>
+                <p>Olympic Park &lt;-&gt; Flemington Maintenance Centre empty trains</p>
             </td>
         </tr>
         <tr>
@@ -189,7 +200,7 @@
             <td>300</td>
             <td>399</td>
             <td>12</td>
-            <td>??</td>
+            <td>11</td>
             <td>
                 <p>T or H sets on South Coast Line (between Sydney and Wollongong or Port Kembla)</p>
             </td>
@@ -198,7 +209,7 @@
             <td>400</td>
             <td>499</td>
             <td>17</td>
-            <td>??</td>
+            <td>30</td>
             <td>
                 <p>H sets on South Coast Line (between Sydney and Dapto or Kiama)</p>
             </td>
@@ -217,7 +228,7 @@
             <td>600</td>
             <td>699</td>
             <td>39</td>
-            <td>??</td>
+            <td>17</td>
             <td>
                 <p>8 car T sets on Illawara Line (T4)</p>
                 <p>Number excludes 641/642 (used for shunting)</p>
@@ -230,6 +241,11 @@
             <td>
                 <p>Used for rosters 1-199 altered by trackwork</p>
             </td>
+        </tr>
+        <tr>
+            <td colspan="2">Suburban Total</td>
+            <td>195</td>
+            <td>113</td>
         </tr>
     </table>
 
@@ -300,8 +316,8 @@
             <td>2*12 + 2*39</td>
             <td>102</td>
             <td class="util-calc" data-rostered="4" data-fleet="2"></td>
-            <td>2*2 + 2*8 + 2*??</td>
-            <td>??</td>
+            <td>2*2 + 2*8 + 2*17</td>
+            <td>54</td>
             <td class="util-calc" data-rostered="7" data-fleet="2"></td>
         </tr>
     </table>
@@ -309,11 +325,154 @@
 
     <h3>Caveats</h3>
     <ul>
-        <li>Based on GTFS data for 2023-02-06 (weekday), 2023-02-10 (weekend), downloaded on 2023-02-05</li>
+        <li>
+            Based on GTFS data for 2023-02-06 (weekday), 2023-02-10 (S2/3 weekend), 2023-02-17 (S1 weekend), downloaded on 2023-02-05
+            <ul>
+                <li>Sector 1 (rosters 300-499,600-699) weekend data is from a different date due to trackwork</li>
+            </ul>
+        </li>
         <li>"temporarily run by &lt;consist&gt;" simply means a train is rostered for a different consist to the numbers around it.
             It is temporary in the sense that these typically change every few months.</li>
         <li>"may be &lt;consist&gt;" means a different class of train takes over halfway through the day</li>
-        <li>No data is available for weekend T4 or South Coast rosters due to trackwork</li>
     </ul>
+
+    <h1>Suburban Train Stabling Points</h1>
+    <table>
+        <tr class="header">
+            <th>Yard</th>
+            <th>Tracking Location(s)</th>
+            <th colspan="2">Number of trains</th>
+            <th>Capacity (8 car trains)</th>
+        </tr>
+        <tr>
+            <td>Auburn Stabling Yard<br>Auburn Maintenance Centre</td>
+            <td>Auburn P3<br>Granville P4</td>
+            <td>4 + 15</td>
+            <td>19</td>
+            <td>21 + 11 = 32</td>
+        </tr>
+        <tr>
+            <td>Bondi Junction Sidings</td>
+            <td>Bondi Junction P1+2</td>
+            <td>1 + 1</td>
+            <td>2</td>
+            <td class="note" title="3 stabling roads, but the third usually isn't used for stabling due to safety issues">2*</td>
+        </tr>
+        <tr>
+            <td>Blacktown Yard</td>
+            <td>Blacktown P1+2<br>Marayong P2</td>
+            <td>2 + 7 + 4</td>
+            <td>13</td>
+            <td>12</td>
+        </tr>
+        <tr>
+            <td>Blacktown Loop</td>
+            <td>Blacktown P3</td>
+            <td>1</td>
+            <td>1</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>Cronulla Platforms & Sidings</td>
+            <td>Cronulla P2</td>
+            <td>1</td>
+            <td>1</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td>Campbelltown Yard</td>
+            <td>Campbelltown P1+2+3<br>Leumeah P1</td>
+            <td>4 + 1 + 4 + 3</td>
+            <td>12</td>
+            <td>16</td>
+        </tr>
+        <tr>
+            <td>Campbelltown P4</td>
+            <td>Campbelltown P4</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>Penrith Yard</td>
+            <td>Emu Plains P1+2<br>Penrith P1+2+3<br>Kingswood P1</td>
+            <td>1 + 1 + 3 + 0 + 1 + 3</td>
+            <td>9</td>
+            <td>16</td>
+        </tr>
+        <tr>
+            <td>Flemington Maintenance Centre</td>
+            <td>Flemington P1+3</td>
+            <td>8 + 1</td>
+            <td>9</td>
+        </tr>
+        <tr>
+            <td>Hornsby Maintenance Centre</td>
+            <td>Hornsby P1+2+3</td>
+            <td>13 + 3 + 8</td>
+            <td>24</td>
+            <td>21</td>
+        </tr>
+        <tr>
+            <td>Leppington Yard</td>
+            <td>Leppington P1+2+4</td>
+            <td>2 + 16 + 2</td>
+            <td>20</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Liverpool Yard</td>
+            <td>Liverpool P2+3</td>
+            <td>2 + 2</td>
+            <td>4</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>Mortdale Maintenance Centre</td>
+            <td>Mortdale P1+2</td>
+            <td>14 + 2</td>
+            <td>16</td>
+            <td>13</td>
+        </tr>
+        <tr>
+            <td>North Sydney Loops</td>
+            <td>North Sydney P2+3<br>Waverton P2</td>
+            <td>1 + 1 + 2</td>
+            <td>4</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>Macdonaldtown Yard</td>
+            <td>Redfern P5+7</td>
+            <td>4 + 1</td>
+            <td>5</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td>Eveleigh Yard</td>
+            <td>Redfern P9</td>
+            <td>3</td>
+            <td>3</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>Richmond Platforms & Siding</td>
+            <td>Richmond P1+2</td>
+            <td>1 + 1</td>
+            <td>2</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>Sydney Terminal</td>
+            <td>Central P1-12</td>
+            <td>4</td>
+            <td>4</td>
+            <td>12</td>
+        </tr>
+        <tr>
+            <td colspan="3">Total</td>
+            <td>149</td>
+        </tr>
+    </table>
 </body>
 </html>
