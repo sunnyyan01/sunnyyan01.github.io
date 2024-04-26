@@ -14,8 +14,9 @@
 <div class="controls">
     <p>&lt; UP</p>
     <select onChange="changeLine()" id="line-selector">
-        <option selected value="banksCur.csv">Bankstown Line (current)</option>
-        <option value="banks2011.csv">Bankstown Line (2013)</option>
+        <option value="banksCur.csv">Bankstown Line (current)</option>
+        <option value="banks2011.csv">Bankstown Line (2011)</option>
+        <option selected value="easthills2011.csv">East Hills Line (2011)</option>
     </select>
     <p>DOWN &gt;</p>
 </div>
@@ -23,8 +24,10 @@
     <h3 id="name-display"></h3>
     <div class="infobox-section" data-type="signal">
         <div class="signal-display" id="signal-display">
+            <div class="signal-head route-ind"></div>
             <div class="signal-head upper"></div>
             <div class="signal-head lower"></div>
+            <div class="signal-head shunt-route-ind"></div>
             <div class="signal-head subsidiary"></div>
         </div>
     </div>
@@ -33,6 +36,7 @@
             
         </div>
     </div>
+    <p id="note-display"></p>
 </div>
 </body>
 </html>

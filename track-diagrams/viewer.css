@@ -114,14 +114,29 @@ div.uncommissioned {
 .signal-head[data-offset=true] {
     transform: translate(20px, 0px);
 }
-.signal-head:empty {
-    display: none;
-}
 
 .signal-display[data-dwarf=true] .signal-head {
     width: 20px;
     padding: 5px;
     border-radius: 0px;
+}
+.signal-head.shunt-route-ind {
+    width: 80px;
+    padding: 5px 0px;
+    border-radius: 0px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.signal-head.shunt-route-ind div {
+    width: 34px;
+    font-size: 22px;
+    padding: 0px 2px;
+    box-sizing: border-box;
+    color: white;
+    background-color: #444;
+    text-align: center;
 }
 .signal-head.subsidiary {
     width: 40px;
@@ -131,6 +146,10 @@ div.uncommissioned {
 }
 .signal-head.subsidiary .lamp.small {
     margin: 10px;
+}
+
+.signal-head:empty {
+    display: none;
 }
 
 .lamp {

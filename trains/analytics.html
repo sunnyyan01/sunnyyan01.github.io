@@ -185,6 +185,7 @@
             <td>14</td>
             <td>
                 <p>4 car H sets on Central Coast Line</p>
+                <p>Roster 200 is an 8 car for part of the day, it divides partway through</p>
             </td>
         </tr>
         <tr>
@@ -239,7 +240,7 @@
             <td>899</td>
             <td colspan="2">Variable</td>
             <td>
-                <p>Used for rosters 1-199 altered by trackwork</p>
+                <p>Used for rosters 1-199 altered by trackwork or empty/test/charter movements</p>
             </td>
         </tr>
         <tr>
@@ -323,6 +324,20 @@
     </table>
     </div>
 
+    <h3>Method</h3>
+    <ul>
+        <li>The GTFS data was downloaded from TfNSW OpenData</li>
+        <li>Using date_to_calendar.py, the service_ids for the target date were found</li>
+        <li>Using rosters.sh, for each trip matching one of the service_ids:
+            <ul>
+                <li>Extract the run number and consist from the trip_id (e.g. 1--A.8.A)</li>
+                <li>Extract the roster number from the run number (e.g. 1 8A)</li>
+            </ul>
+        </li>
+        <li>Sort the above and remove duplicates</li>
+        <li>Use find_roster_ranges.py to find the ranges</li>
+    </ul>
+
     <h3>Caveats</h3>
     <ul>
         <li>
@@ -334,6 +349,33 @@
         <li>"temporarily run by &lt;consist&gt;" simply means a train is rostered for a different consist to the numbers around it.
             It is temporary in the sense that these typically change every few months.</li>
         <li>"may be &lt;consist&gt;" means a different class of train takes over halfway through the day</li>
+        <li>The following ranges are not included in the totals, nor the utilisation numbers, to avoid double counting:
+            <ul>
+                <li>B/F/S rosters: these are either special event services, or will become a L roster at some point during the day</li>
+                <li>Rosters 300-499: these trains switch between suburban and intercity (e.g. C123, K234) run numbers throughout the day</li>
+                <li>Rosters 500-599: these trains become 1-199 during the peak and are already counted there</li>
+                <li>Rosters 700-899: these trains are running to altered schedules</li>
+            </ul>
+        </li>
+        <li>Utilisation figures ignore temporarily changed consists. Either way the figures would be similar.</li>
+    </ul>
+
+    <h3>Discussion</h3>
+    <ul>
+        <li>The numbering scheme for rosters is pretty intuitive:
+            <ul>
+                <li>for the vast majority of trains, the consist and approximate destination can quickly be identified, given this table</li>
+                <li>All Cumberland Line services have roster numbers starting with 5, matching the T5 branding that the line has</li>
+                <li>The L/B/F/S prefix for Olympic Park services clearly shows the origin/destination of each train. It should be noted however that the F prefix is not documented.</li>
+            </ul>
+        </li>
+        <li>However, the South Coast is a bit weird. Trains seem to switch between Cnnn/Knnn and 4nna/3nna respectively without any difference in service pattern.</li>
+        <li>
+            From the utilisation table, you can see the preference is to avoid rostering K and M sets whenever possible.
+            K sets, being built in the 1980s, are now the oldest in the fleet, so it is understandable they avoid them.
+            M sets are a lot newer, but they suffer constant issues with their early 2000s software,
+            so they're only used on the Cumberland on weekends where it is isn't worth breaking up another set to replace them.
+        </li>
     </ul>
 
     <h1>Suburban Train Stabling Points</h1>

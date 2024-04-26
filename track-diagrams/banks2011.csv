@@ -19,7 +19,7 @@
 6.495,UB,platform,Marrickville P1,end=6.650,left
 6.600,DG,track,DG,end=12.500,render_pos=400,direction=down,label=Down Goods
 6.600,UG,track,UG,end=12.500,render_pos=500,direction=up,label=Up Goods
-6.641,DG,signal,SM 716 G,ground,shunt,triangular,shunt_route_ind=DG|DB
+6.641,DG,signal,SM 716 G,facing=up,ground,shunt,triangular,shunt_route_ind=DG|DB
 6.652,DB,signal,SM 159 B
 6.690,UG,signal,SM 718 G,absolute,turnout,route_ind=UB|DB,shunt_route_ind=UB|DB|UG,subsidiary
 6.824,UB,signal,SM 160 B

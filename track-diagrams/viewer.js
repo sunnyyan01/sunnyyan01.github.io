@@ -32,7 +32,7 @@ function renderSignal(e, object) {
     } else {
         upperStr = "GR";
     }
-    signalDisp.children[0].replaceChildren(
+    signalDisp.children[1].replaceChildren(
         ...renderLamps(upperStr)
     );
 
@@ -43,14 +43,25 @@ function renderSignal(e, object) {
     );
     if (object.ground && !object.lower_lamps)
         lowerStr = "";
-    signalDisp.children[1].replaceChildren(
+    signalDisp.children[2].replaceChildren(
         ...renderLamps(lowerStr)
     );
-    signalDisp.children[1].dataset.offset = !object.absolute;
+    signalDisp.children[2].dataset.offset = !object.absolute;
+
+    // Shunt Route Indicator
+    let routeLamps = [];
+    if (object.shunt_route_ind) {
+        for (let route of object.shunt_route_ind.split("|")) {
+            let span = document.createElement("div");
+            span.textContent = route;
+            routeLamps.push(span);
+        }
+    }
+    signalDisp.children[3].replaceChildren(...routeLamps);
 
     // Subsidiary Head
     let subsidStr = object.subsidiary ? "y" : "";
-    signalDisp.children[2].replaceChildren(
+    signalDisp.children[4].replaceChildren(
         ...renderLamps(subsidStr)
     );
 }
@@ -125,6 +136,7 @@ function renderSpeedSign(e, object) {
 
 let nameDisp = null;
 let infobox = null;
+let noteDisplay = null;
 function handleClick(e, object) {
     infobox.dataset.section = object.type;
 
@@ -137,6 +149,8 @@ function handleClick(e, object) {
     } else if (object.type == "track") {
         nameDisp.textContent = object.label || object.id;
     }
+    
+    noteDisplay.textContent = object.note || "";
 }
 
 function parseParams(params) {
@@ -220,7 +234,7 @@ function render(objects, scale) {
         }
 
         element.addEventListener(
-            "mouseover", e => handleClick(e, {km, track, type, id, ...params})
+            "click", e => handleClick(e, {km, track, type, id, ...params})
         );
 
         renderArea.appendChild(element);
@@ -252,4 +266,5 @@ window.addEventListener("load", e => {
     infobox = document.getElementById("infobox");
     signalDisp = document.getElementById("signal-display");
     speedSignDisplay = document.getElementById("speed-sign-display");
+    noteDisplay = document.getElementById("note-display");
 })
