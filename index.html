@@ -3,8 +3,66 @@
 <head>
     <meta charset="utf-8">
     <title>aWebsite</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-red.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <style>
+        .cards {
+            display: flex;
+            flex-direction: row;
+        }
+        .cards .mdl-card {
+            width: 512px;
+            margin: 0px 5px;
+        }
+        .cards .mdl-card__title {
+            height: 300px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            padding: 0px;
+        }
+        .cards .mdl-card__title-text {
+            width: 100%;
+            background-color: rgba(0,0,0,0.2);
+            color: white;
+            padding: 10px 20px;
+        }
+    </style>
 </head>
 <body>
-<p>Here is a website that may contain some things in the future.</p>
+<h1>Trains</h1>
+<div class="cards">
+    <div class="mdl-card mdl-shadow--2dp">
+        <div class="mdl-card__title" style="background-image: url('tt-analytics/title-image.png')">
+            <h2 class="mdl-card__title-text">Timetable Analytics</h2>
+        </div>
+        <div class="mdl-card__supporting-text">
+            Ever wondered how many trains run on the Sydney rail network each day?
+            Or which platform has the most trains per day?
+            Here we'll take a dive into numbers that make up Sydney's complex train timetables.
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="tt-analytics/analytics.html">
+            Open
+        </a>
+        </div>
+    </div>
+    <div class="mdl-card mdl-shadow--2dp">
+        <div class="mdl-card__title" style="background-image: url('track-diagrams/title-image.png')">
+            <h2 class="mdl-card__title-text">Track Diagrams</h2>
+        </div>
+        <div class="mdl-card__supporting-text">
+            An interactive track diagram of the Sydney rail network, including signals, speed signs and much more.
+            NOTE: Do NOT use these diagrams for safeworking purposes.
+        </div>
+        <div class="mdl-card__actions mdl-card--border" href="trains/analytics.html">
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="track-diagrams/viewer.html">
+            Open
+        </a>
+        </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

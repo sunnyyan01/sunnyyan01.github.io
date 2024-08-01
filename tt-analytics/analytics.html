@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Sydney Trains | Timetable Analytics</title>
+    <script src="analytics.js"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        div.tables {
+            display: flex;
+            flex-direction: row;
+        }
+
+        td,
+        th {
+            padding: 5px;
+            border: 1px solid grey;
+        }
+
+        td {
+            text-align: right;
+        }
+
+        table {
+            box-sizing: border-box;
+            margin: 5px;
+            width: 50%;
+            caption-side: top;
+            height: fit-content;
+            border-collapse: collapse;
+        }
+
+        caption {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        table p {
+            margin: 0;
+            text-align: left;
+        }
+
+        table td[colspan=2] {
+            text-align: center;
+        }
+
+        td.note {
+            text-decoration: gray underline dotted 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Suburban Train Rosters</h1>
+
+    <div class="tables">
+        <table class="roster-range-table">
+            <caption>Roster Ranges</caption>
+            <tr>
+                <th>Start</th>
+                <th>End</th>
+                <th>Weekday</th>
+                <th>Weekend</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>L1</td>
+                <td>L9</td>
+                <td>2</td>
+                <td>2</td>
+                <td>
+                    <p>Olympic Park shuttles (range not tied to consist)</p>
+                    <p>Currently 4M on weekdays and 8A on weekends</p>
+                </td>
+            </tr>
+            <tr>
+                <td>B1</td>
+                <td>B9</td>
+                <td colspan="2">Variable</td>
+                <td>
+                    <p>Olympic Park &lt;-&gt; West Special Event Services</p>
+                    <p>This range is also used by the shuttles above when travelling empty to Blacktown Yard</p>
+                </td>
+            </tr>
+            <tr>
+                <td>F1</td>
+                <td>F9</td>
+                <td colspan="2">Variable</td>
+                <td>
+                    <p>Olympic Park &lt;-&gt; Flemington Maintenance Centre empty trains</p>
+                </td>
+            </tr>
+            <tr>
+                <td>S1</td>
+                <td>S9</td>
+                <td colspan="2">Variable</td>
+                <td>
+                    <p>Olympic Park &lt;-&gt; Sydney Terminal Special Event Services</p>
+                </td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>35</td>
+                <td>34</td>
+                <td>33</td>
+                <td>
+                    <p>8 car B sets on City Circle Lines (T2/3/8)</p>
+                    <p>Roster 19 (weekdays) is temporarily run by 8M</p>
+                </td>
+            </tr>
+            <tr>
+                <td>37</td>
+                <td>49</td>
+                <td>13</td>
+                <td>0</td>
+                <td>
+                    <p>8 car K sets on City Circle Lines (T2/3/8)</p>
+                    <p>Roster 37 (weekdays) may be 8M</p>
+                </td>
+            </tr>
+            <tr>
+                <td>50</td>
+                <td>59</td>
+                <td>6</td>
+                <td>4</td>
+                <td>
+                    <p>4 car M sets on Cumberland Line (T5)</p>
+                </td>
+            </tr>
+            <tr>
+                <td>60</td>
+                <td>70</td>
+                <td>11</td>
+                <td>0</td>
+                <td>
+                    <p>8 car M sets on City Circle Lines (T2/3/8)</p>
+                    <p>Roster 60 (weekdays) may be 8K</p>
+                    <p>Roster 67 (weekdays) is temporarily run by 8K</p>
+                </td>
+            </tr>
+            <tr>
+                <td>71</td>
+                <td>75</td>
+                <td>0</td>
+                <td>2</td>
+                <td>
+                    <p>8 car T sets on City Circle Lines (T2/3/8)</p>
+                    <p>Weekends only, to maintain crew qualifications</p>
+                </td>
+            </tr>
+            <tr>
+                <td>76</td>
+                <td>99</td>
+                <td>18</td>
+                <td>12</td>
+                <td>
+                    <p>8 car A sets on City Circle Lines (T2/3/8)</p>
+                    <p>Rosters 98-99 (weekdays) temporarily run by 8T</p>
+                </td>
+            </tr>
+            <tr>
+                <td>101</td>
+                <td>119</td>
+                <td>12</td>
+                <td>8</td>
+                <td>
+                    <p>8 car T sets on Sector 3 (T1/9)</p>
+                    <p>Rosters 102, 107 (weekdays) temporarily run by 8A</p>
+                    <p>Roster 101 (weekends) temporarily run by 8B</p>
+                </td>
+            </tr>
+            <tr>
+                <td>120</td>
+                <td>179</td>
+                <td>53</td>
+                <td>40</td>
+                <td>
+                    <p>8 car A sets on Sector 3 (T1/9)</p>
+                    <p>Roster 122 (weekdays) temporarily run by 8B</p>
+                </td>
+            </tr>
+            <tr>
+                <td>190</td>
+                <td>193</td>
+                <td>4</td>
+                <td>0</td>
+                <td>
+                    <p>8 car B sets on Sector 3 (T1/9)</p>
+                </td>
+            </tr>
+            <tr>
+                <td>200</td>
+                <td>259</td>
+                <td>12</td>
+                <td>14</td>
+                <td>
+                    <p>4 car H sets on Central Coast Line</p>
+                    <p>Roster 200 is an 8 car for part of the day, it divides partway through</p>
+                </td>
+            </tr>
+            <tr>
+                <td>280</td>
+                <td>299</td>
+                <td>12</td>
+                <td>11</td>
+                <td>
+                    <p>8 car H sets on Central Coast Line</p>
+                </td>
+            </tr>
+            <tr>
+                <td>300</td>
+                <td>399</td>
+                <td>12</td>
+                <td>11</td>
+                <td>
+                    <p>T or H sets on South Coast Line (between Sydney and Wollongong or Port Kembla)</p>
+                </td>
+            </tr>
+            <tr>
+                <td>400</td>
+                <td>499</td>
+                <td>17</td>
+                <td>30</td>
+                <td>
+                    <p>H sets on South Coast Line (between Sydney and Dapto or Kiama)</p>
+                </td>
+            </tr>
+            <tr>
+                <td>500</td>
+                <td>599</td>
+                <td>10</td>
+                <td>17</td>
+                <td>
+                    <p>8 car A or B sets on Cumberland Line (T5)</p>
+                    <p>Formed off rosters 1-199 during offpeak hours</p>
+                </td>
+            </tr>
+            <tr>
+                <td>600</td>
+                <td>699</td>
+                <td>39</td>
+                <td>17</td>
+                <td>
+                    <p>8 car T sets on Illawara Line (T4)</p>
+                    <p>Number excludes 641/642 (used for shunting)</p>
+                </td>
+            </tr>
+            <tr>
+                <td>700</td>
+                <td>899</td>
+                <td colspan="2">Variable</td>
+                <td>
+                    <p>Used for rosters 1-199 altered by trackwork or empty/test/charter movements</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">Suburban Total</td>
+                <td>195</td>
+                <td>113</td>
+            </tr>
+        </table>
+
+
+        <table class="utilisation-table">
+            <caption>Utilisation</caption>
+            <tr class="header">
+                <th rowspan="2">Class</th>
+                <th rowspan="2">Cars per set</th>
+                <th rowspan="2">Sets in fleet</th>
+                <th colspan="3">Weekday</th>
+                <th colspan="3">Weekend</th>
+            </tr>
+            <tr class="header">
+                <th colspan="2">Sets rostered</th>
+                <th>Utilisation</th>
+                <th colspan="2">Sets rostered</th>
+                <th>Utilisation</th>
+            </tr>
+            <tr>
+                <td>A</td>
+                <td>8</td>
+                <td>78</td>
+                <td>18 + 53</td>
+                <td>71</td>
+                <td class="util-calc" data-rostered="4" data-fleet="2"></td>
+                <td>12 + 40 + 2</td>
+                <td>54</td>
+                <td class="util-calc" data-rostered="7" data-fleet="2"></td>
+            </tr>
+            <tr>
+                <td>B</td>
+                <td>8</td>
+                <td>41</td>
+                <td>34 + 4</td>
+                <td>38</td>
+                <td class="util-calc" data-rostered="4" data-fleet="2"></td>
+                <td>33</td>
+                <td>33</td>
+                <td class="util-calc" data-rostered="7" data-fleet="2"></td>
+            </tr>
+            <tr>
+                <td>K</td>
+                <td>4</td>
+                <td>40</td>
+                <td>2*13</td>
+                <td>26</td>
+                <td class="util-calc" data-rostered="4" data-fleet="2"></td>
+                <td>0</td>
+                <td>0</td>
+                <td class="util-calc" data-rostered="7" data-fleet="2"></td>
+            </tr>
+            <tr>
+                <td>M</td>
+                <td>4</td>
+                <td>35</td>
+                <td>6 + 2 + 2*11</td>
+                <td>30</td>
+                <td class="util-calc" data-rostered="4" data-fleet="2"></td>
+                <td>4</td>
+                <td>4</td>
+                <td class="util-calc" data-rostered="7" data-fleet="2"></td>
+            </tr>
+            <tr>
+                <td>T</td>
+                <td>4</td>
+                <td>111</td>
+                <td>2*12 + 2*39</td>
+                <td>102</td>
+                <td class="util-calc" data-rostered="4" data-fleet="2"></td>
+                <td>2*2 + 2*8 + 2*17</td>
+                <td>54</td>
+                <td class="util-calc" data-rostered="7" data-fleet="2"></td>
+            </tr>
+        </table>
+    </div>
+
+    <h3>Method</h3>
+    <ul>
+        <li>The GTFS data was downloaded from TfNSW OpenData</li>
+        <li>Using date_to_calendar.py, the service_ids for the target date were found</li>
+        <li>Using rosters.sh, for each trip matching one of the service_ids:
+            <ul>
+                <li>Extract the run number and consist from the trip_id (e.g. 1--A.8.A)</li>
+                <li>Extract the roster number from the run number (e.g. 1 8A)</li>
+            </ul>
+        </li>
+        <li>Sort the above and remove duplicates</li>
+        <li>Use find_roster_ranges.py to find the ranges</li>
+    </ul>
+
+    <h3>Caveats</h3>
+    <ul>
+        <li>
+            Based on GTFS data for 2023-02-06 (weekday), 2023-02-10 (S2/3 weekend), 2023-02-17 (S1 weekend), downloaded
+            on 2023-02-05
+            <ul>
+                <li>Sector 1 (rosters 300-499,600-699) weekend data is from a different date due to trackwork</li>
+            </ul>
+        </li>
+        <li>"temporarily run by &lt;consist&gt;" simply means a train is rostered for a different consist to the numbers
+            around it.
+            It is temporary in the sense that these typically change every few months.</li>
+        <li>"may be &lt;consist&gt;" means a different class of train takes over halfway through the day</li>
+        <li>The following ranges are not included in the totals, nor the utilisation numbers, to avoid double counting:
+            <ul>
+                <li>B/F/S rosters: these are either special event services, or will become a L roster at some point
+                    during the day</li>
+                <li>Rosters 300-499: these trains switch between suburban and intercity (e.g. C123, K234) run numbers
+                    throughout the day</li>
+                <li>Rosters 500-599: these trains become 1-199 during the peak and are already counted there</li>
+                <li>Rosters 700-899: these trains are running to altered schedules</li>
+            </ul>
+        </li>
+        <li>Utilisation figures ignore temporarily changed consists. Either way the figures would be similar.</li>
+    </ul>
+
+    <h3>Discussion</h3>
+    <ul>
+        <li>The numbering scheme for rosters is pretty intuitive:
+            <ul>
+                <li>for the vast majority of trains, the consist and approximate destination can quickly be identified,
+                    given this table</li>
+                <li>All Cumberland Line services have roster numbers starting with 5, matching the T5 branding that the
+                    line has</li>
+                <li>The L/B/F/S prefix for Olympic Park services clearly shows the origin/destination of each train. It
+                    should be noted however that the F prefix is not documented.</li>
+            </ul>
+        </li>
+        <li>However, the South Coast is a bit weird. Trains seem to switch between Cnnn/Knnn and 4nna/3nna respectively
+            without any difference in service pattern.</li>
+        <li>
+            From the utilisation table, you can see the preference is to avoid rostering K and M sets whenever possible.
+            K sets, being built in the 1980s, are now the oldest in the fleet, so it is understandable they avoid them.
+            M sets are a lot newer, but they suffer constant issues with their early 2000s software,
+            so they're only used on the Cumberland on weekends where it is isn't worth breaking up another set to
+            replace them.
+        </li>
+    </ul>
+
+    <h1>Suburban Train Stabling Points</h1>
+    <table>
+        <tr class="header">
+            <th>Yard</th>
+            <th>Tracking Location(s)</th>
+            <th colspan="2">Number of trains</th>
+            <th>Capacity (8 car trains)</th>
+        </tr>
+        <tr>
+            <td>Auburn Stabling Yard<br>Auburn Maintenance Centre</td>
+            <td>Auburn P3<br>Granville P4</td>
+            <td>4 + 15</td>
+            <td>19</td>
+            <td>21 + 11 = 32</td>
+        </tr>
+        <tr>
+            <td>Bondi Junction Sidings</td>
+            <td>Bondi Junction P1+2</td>
+            <td>1 + 1</td>
+            <td>2</td>
+            <td class="note"
+                title="3 stabling roads, but the third usually isn't used for stabling due to safety issues">2*</td>
+        </tr>
+        <tr>
+            <td>Blacktown Yard</td>
+            <td>Blacktown P1+2<br>Marayong P2</td>
+            <td>2 + 7 + 4</td>
+            <td>13</td>
+            <td>12</td>
+        </tr>
+        <tr>
+            <td>Blacktown Loop</td>
+            <td>Blacktown P3</td>
+            <td>1</td>
+            <td>1</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>Cronulla Platforms & Sidings</td>
+            <td>Cronulla P2</td>
+            <td>1</td>
+            <td>1</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td>Campbelltown Yard</td>
+            <td>Campbelltown P1+2+3<br>Leumeah P1</td>
+            <td>4 + 1 + 4 + 3</td>
+            <td>12</td>
+            <td>16</td>
+        </tr>
+        <tr>
+            <td>Campbelltown P4</td>
+            <td>Campbelltown P4</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>Penrith Yard</td>
+            <td>Emu Plains P1+2<br>Penrith P1+2+3<br>Kingswood P1</td>
+            <td>1 + 1 + 3 + 0 + 1 + 3</td>
+            <td>9</td>
+            <td>16</td>
+        </tr>
+        <tr>
+            <td>Flemington Maintenance Centre</td>
+            <td>Flemington P1+3</td>
+            <td>8 + 1</td>
+            <td>9</td>
+        </tr>
+        <tr>
+            <td>Hornsby Maintenance Centre</td>
+            <td>Hornsby P1+2+3</td>
+            <td>13 + 3 + 8</td>
+            <td>24</td>
+            <td>21</td>
+        </tr>
+        <tr>
+            <td>Leppington Yard</td>
+            <td>Leppington P1+2+4</td>
+            <td>2 + 16 + 2</td>
+            <td>20</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Liverpool Yard</td>
+            <td>Liverpool P2+3</td>
+            <td>2 + 2</td>
+            <td>4</td>
+            <td>6</td>
+        </tr>
+        <tr>
+            <td>Mortdale Maintenance Centre</td>
+            <td>Mortdale P1+2</td>
+            <td>14 + 2</td>
+            <td>16</td>
+            <td>13</td>
+        </tr>
+        <tr>
+            <td>North Sydney Loops</td>
+            <td>North Sydney P2+3<br>Waverton P2</td>
+            <td>1 + 1 + 2</td>
+            <td>4</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>Macdonaldtown Yard</td>
+            <td>Redfern P5+7</td>
+            <td>4 + 1</td>
+            <td>5</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td>Eveleigh Yard</td>
+            <td>Redfern P9</td>
+            <td>3</td>
+            <td>3</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>Richmond Platforms & Siding</td>
+            <td>Richmond P1+2</td>
+            <td>1 + 1</td>
+            <td>2</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>Sydney Terminal</td>
+            <td>Central P1-12</td>
+            <td>4</td>
+            <td>4</td>
+            <td>12</td>
+        </tr>
+        <tr>
+            <td colspan="3">Total</td>
+            <td>149</td>
+        </tr>
+    </table>
+
+    <h1>Least and Most Used Platforms</h1>
+    <p>On 11 Jul 2024, only counting services that stop to pick up passengers</p>
+    <div class="tables">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Usage per day</th>
+            </tr>
+            <tr>
+                <td>235044</td>
+                <td>Armidale Station Platform 1</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>2144241</td>
+                <td>Auburn Station Platform 1</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>2142312</td>
+                <td>Clyde Station Platform 2</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>270122</td>
+                <td>Coolamon Station Platform 1</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>213283</td>
+                <td>Croydon Station Platform 3</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>2830143</td>
+                <td>Dubbo Station Platform 1</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>258125</td>
+                <td>Gunning Station Platform 2</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>268058</td>
+                <td>Griffith Station Platform 1</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>2150401</td>
+                <td>Harris Park Station Platform 1</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>27054</td>
+                <td>Leeton Station Platform 1</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>240024</td>
+                <td>Moree Station Platform 1</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>27003</td>
+                <td>Narrandera Station Platform 1</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>600037</td>
+                <td>Brisbane (Roma St) Station Platform 2</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>2000323</td>
+                <td>Central Station Platform 3</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>213051</td>
+                <td>Summer Hill Station Platform 1</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>204831</td>
+                <td>Stanmore Station Platform 1</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>23419</td>
+                <td>Werris Creek Station Platform 2</td>
+                <td>1</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Usage per day</th>
+            </tr>
+            <tr>
+                <td>2067144</td>
+                <td>Chatswood Station Platform 4</td>
+                <td>228</td>
+            </tr>
+            <tr>
+                <td>2060101</td>
+                <td>North Sydney Station Platform 1</td>
+                <td>228</td>
+            </tr>
+            <tr>
+                <td>2060104</td>
+                <td>North Sydney Station Platform 4</td>
+                <td>228</td>
+            </tr>
+            <tr>
+                <td>2065153</td>
+                <td>St Leonards Station Platform 3</td>
+                <td>228</td>
+            </tr>
+            <tr>
+                <td>2015133</td>
+                <td>Redfern Station Platform 3</td>
+                <td>232</td>
+            </tr>
+            <tr>
+                <td>2015134</td>
+                <td>Redfern Station Platform 4</td>
+                <td>233</td>
+            </tr>
+            <tr>
+                <td>2135236</td>
+                <td>Strathfield Station Platform 6</td>
+                <td>234</td>
+            </tr>
+            <tr>
+                <td>206142</td>
+                <td>Milsons Point Station Platform 2</td>
+                <td>241</td>
+            </tr>
+            <tr>
+                <td>2000393</td>
+                <td>Town Hall Station Platform 3</td>
+                <td>241</td>
+            </tr>
+            <tr>
+                <td>2000404</td>
+                <td>Wynyard Station Platform 4</td>
+                <td>241</td>
+            </tr>
+            <tr>
+                <td>2000336</td>
+                <td>Central Station Platform 16</td>
+                <td>242</td>
+            </tr>
+            <tr>
+                <td>2000338</td>
+                <td>Central Station Platform 18</td>
+                <td>243</td>
+            </tr>
+            <tr>
+                <td>206141</td>
+                <td>Milsons Point Station Platform 1</td>
+                <td>244</td>
+            </tr>
+            <tr>
+                <td>2000392</td>
+                <td>Town Hall Station Platform 2</td>
+                <td>244</td>
+            </tr>
+            <tr>
+                <td>2000403</td>
+                <td>Wynyard Station Platform 3</td>
+                <td>244</td>
+            </tr>
+            <tr>
+                <td>2000337</td>
+                <td>Central Station Platform 17</td>
+                <td>255</td>
+            </tr>
+            <tr>
+                <td>2000352</td>
+                <td>Circular Quay Station Platform 2</td>
+                <td>256</td>
+            </tr>
+            <tr>
+                <td>2000372</td>
+                <td>Museum Station Platform 2</td>
+                <td>256</td>
+            </tr>
+            <tr>
+                <td>2000382</td>
+                <td>St James Station Platform 2</td>
+                <td>256</td>
+            </tr>
+            <tr>
+                <td>2000396</td>
+                <td>Town Hall Station Platform 6</td>
+                <td>256</td>
+            </tr>
+            <tr>
+                <td>2000406</td>
+                <td>Wynyard Station Platform 6</td>
+                <td>256</td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

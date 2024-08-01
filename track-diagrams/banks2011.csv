@@ -36,7 +36,7 @@
 7.785,DB,platform,Dulwich Hill P2,end=7.955,right
 7.785,UB,platform,Dulwich Hill P1,end=7.955,right
 7.815,DG,speed,genX=25
-7.818,DG,signal,SM 103 G,absolute,turnout,close_up
+7.818,DG,signal,SM 103 G,absolute,turnout,closeup
 7.950,UEF,track,UEF,end=8.000
 7.950,DEF,track,DEF,end=8.000
 7.820,UG,points,P140,b_end=7.950,b_track=UEF
@@ -47,12 +47,16 @@
 7.960,DB,signal,SM 171 B,note=Coact needed due to poor visibility from 8 car stop
 8.103,UB,signal,SM 172 B
 8.207,DB,signal,SM 173 B
+8.230,DG,signal,SM 109 G,absolute
+8.392,UG,signal,SM 104 G,absolute,turnout,closeup
 8.402,UB,signal,SM 174 B
 8.594,DB,signal,SM 175 B
+8.621,DG,signal,SM 115 G,absolute,subsidiary
 8.715,UB,signal,176 REPEATER,ground,coact=SM 176 B
 8.721,UB,signal,SM 176 B,note=Coact needed due to poor visibility from 8 car stop
 8.721,DB,platform,Hurlstone Park P2,end=8.895,left
 8.721,UB,platform,Hurlstone Park P1,end=8.895,left
+8.762,UG,signal,SM 102 G,absolute
 8.899,DB,signal,SM 177 B
 9.001,UB,signal,SM 180 B
 9.233,UB,signal,SM 182 B
@@ -77,12 +81,18 @@
 11.340,DB,speed,S11.340,genX=50,muX=50,xAppliesTo=P262
 11.380,DB,points,P262,b_end=11.468,b_track=UB
 11.420,UB,speed,S11.420,genX=50,xAppliesTo=P261
-11.601,UB,signal,SM 210 IND,ground,upper_lamps=GYRY,shunt_route_ind=B|G,coact=SM 210 B
+11.601,UB,signal,SM 210 IND,ground,subsidiary,route_ind=B|G,coact=SM 210 B
 11.605,DB,platform,Campsie P2,end=11.790,left
 11.605,UB,platform,Campsie P1,end=11.790,left
 11.605,DG,platform,Campsie Goods P2,end=11.690,left
 11.608,UB,signal,SM 210 B,absolute,turnout,subsidiary,shunt_route_ind=UB|UG,note=Coact needed due to poor visibility from 8 car stop
 11.625,UG,signal,SM 208 G,absolute,subsidiary
 11.625,UG,platform,Campsie Goods P1,end=11.710,left
+11.792,DB,signal,SM 211 B,absolute,subsidiary
+11.796,UB,signal,SM 213 B,absolute,subsidiary,lower_lamps=YR,position=right,facing=down
+12.115,DG,signal,SM 215 G,absolute,subsidiary
+12.116,UB,signal,SM 217 G,absolute,upper_lamps=YR,lower_lamps=YR,route_ind= ,shunt_route_ind=DB|DG,subsidiary,facing=down
 12.130,UB,speed,S12.130,genX=25,xAppliesTo=P263,facing=down
+12.235,DB,signal,SM 219 B,absolute,subsidiary
 12.270,UB,speed,S12.270,genX=50,xAppliesTo=P264,facing=down
+12.338,UB,signal,SM 216 B,absolute,subsidiary

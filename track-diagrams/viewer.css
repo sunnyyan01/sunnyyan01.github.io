@@ -97,6 +97,7 @@ div.uncommissioned {
     background-position: 30px 10px;
     background-repeat: no-repeat;
     padding-bottom: 100px;
+    margin-left: 100px;
 }
 .signal-display[data-ground=true] {
     background: none;
@@ -104,52 +105,147 @@ div.uncommissioned {
 }
 
 .signal-head {
-    width: 40px;
+    box-sizing: border-box;
+    width: 80px;
     background-color: black;
     padding: 20px;
     padding-bottom: 5px;
     border-radius: 50px 50px 0px 0px;
     margin-bottom: 20px;
 }
-.signal-head[data-offset=true] {
+.signal-head[data-offset=left] {
+    transform: translate(-20px, 0px);
+}
+.signal-head[data-offset=right] {
     transform: translate(20px, 0px);
 }
 
+.signal-display[data-ground=true] .signal-head {
+    margin-bottom: 0px;
+}
 .signal-display[data-dwarf=true] .signal-head {
-    width: 20px;
+    width: 30px;
     padding: 5px;
     border-radius: 0px;
 }
+.signal-head.route-ind {
+    position: relative;
+    height: 80px;
+    padding: 0px;
+    border-radius: 0px;
+    border: 10px solid black;
+    background-color: #444;
+}
+.signal-head.route-ind div {
+    position: absolute;
+    height: 60px;
+    width: 60px;
+    font-size: 56px;
+    color: white;
+    text-align: center;
+}
+.signal-head.route-ind div.left {
+    margin: 0px 25px;
+    height: 60px;
+    width: 10px;
+    background-color: white;
+    transform: rotate(-45deg);
+}
+.signal-head.route-ind div.right {
+    margin: 0px 25px;
+    height: 60px;
+    width: 10px;
+    background-color: white;
+    transform: rotate(45deg);
+}
+.signal-display[data-dwarf=true] .signal-head.shunt-route-ind,
+.signal-display[data-dwarf=true] .signal-head.route-ind {
+    display: flex;
+    flex-direction: column;
+    height: unset;
+    padding: 0px;
+    align-content: center;
+}
 .signal-head.shunt-route-ind {
     width: 80px;
-    padding: 5px 0px;
+    padding: 2px;
     border-radius: 0px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
 }
+.signal-display[data-dwarf=true] .signal-head.shunt-route-ind div,
+.signal-display[data-dwarf=true] .signal-head.route-ind div {
+    position: unset;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    font-size: 14px;
+    padding: 0px 2px;
+    margin: 2px 0px;
+}
 .signal-head.shunt-route-ind div {
     width: 34px;
-    font-size: 22px;
+    margin: 2px;
+    font-size: 20px;
     padding: 0px 2px;
     box-sizing: border-box;
     color: white;
     background-color: #444;
     text-align: center;
 }
+.signal-head.feather-route-ind {
+    position: relative;
+    height: 80px;
+    padding: 0px;
+    border-radius: 40px;
+    margin-top: 80px;
+}
 .signal-head.subsidiary {
-    width: 40px;
-    height: 40px;
     padding: 20px;
     border-radius: 50px;
 }
 .signal-head.subsidiary .lamp.small {
     margin: 10px;
 }
+.signal-head.triangular {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    position: relative;
+    clip-path: polygon(20% 0, 80% 0, 100% 100%, 0 100%);
+    border-radius: 0px;
+    height: 80px;
+    flex-direction: row;
+    padding: 0px;
+    margin: 0px;
+}
 
 .signal-head:empty {
     display: none;
+}
+
+.signal-head.feather-route-ind .casing {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 30px;
+    height: 150px;
+    background-color: black;
+    transform-origin: 15px 135px;
+    bottom: 25px;
+}
+.signal-head.feather-route-ind .left {
+    transform: rotate(-45deg);
+    right: 25px;
+}
+.signal-head.feather-route-ind .right {
+    transform: rotate(45deg);
+    left: 25px;
+}
+.signal-head.feather-route-ind .lamp {
+    margin: 5px;
 }
 
 .lamp {
@@ -164,8 +260,19 @@ div.uncommissioned {
     border-radius: 10px;
     margin: 15px 10px;
 }
+.signal-head.triangular .lamp {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    margin: 5px 2px;
+}
 .signal-display[data-dwarf=true] .lamp {
     margin: 5px 0px;
+}
+.signal-head.triangular .lamp.yellow {
+    align-self: flex-start;
+    position: absolute;
+    left: 15px;
 }
 .lamp.red {
     background-color: red;
@@ -175,6 +282,9 @@ div.uncommissioned {
 }
 .lamp.green {
     background-color: lime;
+}
+.lamp.white {
+    background-color: white;
 }
 
 .speed-sign-display {

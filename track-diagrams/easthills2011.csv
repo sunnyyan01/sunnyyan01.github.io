@@ -1,0 +1,134 @@
+7.642,DM,track,DM,end=14.022,render_pos=100,direction=down,label=Down East Hills Main
+7.642,UM,track,UM,end=14.022,render_pos=400,direction=up,label=Up East Hills Main
+7.642,UM,signal,SM 672 EH,absolute,subsidiary
+7.713,DM,signal,SM 401 EH,absolute,route_repeater=/
+7.829,DM,speed,S7.8,gen=80,high=85
+8.044,UM,signal,SM 674 EH,absolute
+8.100,DL,track,DL,end=31.330,render_pos=200,direction=down,label=Down East Hills Local
+8.100,UL,track,UL,end=31.330,render_pos=300,direction=up,label=Up East Hills Local
+8.204,DL,signal,SM 413 SR,absolute,route_ind=M|L,shunt_route_ind=DM|DL,subsidiary
+8.204,DM,signal,SM 411 EH,absolute,route_ind=M|L,shunt_route_ind=DM|DL,subsidiary
+8.207,UL,signal,SM 415 SR,ground,shunt=triangular,shunt_route_ind=DM|DL|UL,facing=down,position=right
+8.213,DM,speed,SP501,genX=70
+8.214,UM,points,P502,b_end=8.365,b_track=UL
+8.215,DM,points,P501,b_end=8.370,b_track=DL
+8.216,UL,points,P500,b_end=8.269,b_track=DL
+8.220,UM,speed,S8.2,gen=80,high=80
+8.343,DM,speed,S8.3,gen=80
+8.380,UL,speed,SP502,genX=70
+8.380,UL,points,P504,b_end=8.560,b_track=UM
+8.385,DL,points,P503,b_end=8.560,b_track=DM
+8.388,DL,speed,SP503,genX=70
+8.542,UL,signal,SM 420 EH,absolute,route_ind=E|A,shunt_route_ind=EH|AL,subsidiary
+8.542,DL,signal,SM 418 EH,absolute,upper_lamps=YR,lower_lamps=YR,subsidiary=left,facing=up
+8.544,DL,speed,S8.5,gen=80
+8.570,UL,platform,Turella P1,end=8.722,right
+8.570,DL,platform,Turella P2,end=8.722,right
+8.579,UM,signal,SM 422 US,absolute,route_ind=E|A,shunt_route_ind=EH|AL,subsidiary
+8.579,DM,signal,SM 416 DS,absolute,upper_lamps=YR,lower_lamps=YR,subsidiary=left,facing=up
+8.618,UM,speed,SP504,genX=70
+8.742,UL,signal,FIXED RED,absolute,upper_lamps=R,lower_lamps=R,facing=down
+8.752,DL,signal,SM 427 DL,absolute
+8.752,DM,signal,SM 425 DM,absolute
+9.154,UM,signal,SM 430 UM,absolute,low_speed,feather_route_repeater=/
+9.154,UL,signal,SM 428 UL,absolute,low_speed,feather_route_repeater=\
+9.469,DL,signal,L 9.5
+9.469,DM,signal,M 9.5
+9.962,UM,signal,M 10.0
+9.962,UL,signal,L 10.0
+10.010,UL,platform,Bardwell Park P1,end=10.190,right
+10.010,DL,platform,Bardwell Park P2,end=10.190,right
+10.225,DL,signal,L 10.3
+10.225,DM,signal,M 10.3
+10.682,UM,signal,M 10.6
+10.682,UL,signal,L 10.6
+10.880,DL,signal,L 10.9
+10.880,DM,signal,M 10.9
+11.260,UL,signal,L 11.2
+11.273,UL,signal,L 11.2 REPEATER,position=right
+11.328,UM,signal,M 11.2
+11.293,UL,platform,Bexley North P1,end=11.456,right
+11.293,DL,platform,Bexley North P2,end=11.456,right
+11.486,DL,signal,L 11.5
+11.486,DM,signal,M 11.5
+11.679,UM,speed,S11.6,gen=80,high=90
+11.745,DM,speed,S11.7,gen=100,high=115
+11.822,UM,signal,M 11.8
+11.822,UL,signal,L 11.8
+12.053,DL,signal,SM 435 DL,absolute
+12.053,DM,signal,M 12.1
+12.525,UM,signal,M 12.6
+12.525,UL,signal,L 12.6
+12.544,UL,platform,Kingsgrove P1,end=12.703,right
+12.544,DL,platform,Kingsgrove P2,end=12.703,right
+12.735,DL,signal,SM 437 DL,absolute,subsidiary,shunt_route_ind=DL|TR
+12.735,DM,signal,M 12.7
+12.793,DL,speed,SP508,genX=25
+12.800,UL,speed,S12.8,gen=80,high=85
+12.900,TB,track,TB,end=13.130,render_pos=250,direction=up,label=Turnback
+12.787,DL,points,P508,b_track=TB,b_end=12.900
+12.830,UL,points,P509,b_track=TB,b_end=12.900
+12.935,TB,signal,SM 438 TB,shunt=triangular
+12.935,TB,speed,SP509,genX=25,position=right
+13.082,UM,signal,M 13.0
+13.082,UL,signal,SM 440 UL,absolute,subsidiary
+13.160,DL,speed,S13.1,gen=115,high=115
+13.407,DL,signal,SM 443 DL,absolute
+13.407,DL,signal,SM 441 DM,absolute,lower_lamps=_YR
+13.747,UM,signal,M 13.8
+13.747,UL,signal,SM 444 UL,absolute
+14.007,DL,signal,SM 447 DL,absolute,subsidiary
+14.007,DM,signal,SM 445 DM,absolute,subsidiary,upper_lamps=YR,lower_lamps=_YR
+14.022,UM,points,P512,b_end=14.147,b_track=UL
+14.022,DM,points,P511,b_end=14.147,b_track=DL
+14.237,UL,signal,SM 448 EH,absolute,turnout,subsidiary,shunt_route_ind=UM|UL
+14.520,UL,platform,Beverly Hills P1,right,end=14.733
+14.520,DL,platform,Beverly Hills P2,right,end=14.733
+14.888,DL,signal,EH 9.21
+15.198,UL,signal,SM 452 EH,absolute
+15.398,DL,signal,EH 9.47
+15.705,UL,platform,Narwee P1,right,end=15.855
+15.705,DL,platform,Narwee P2,right,end=15.855
+15.883,DL,signal,EH 9.87
+15.883,DL,signal,EH 9.87 CO-ACT,position=right
+16.318,UL,signal,EH 10.14
+16.495,DL,signal,EH 10.15,prelim_med
+16.858,UL,signal,EH 10.46,lower_lamps=G_R
+17.173,DL,signal,EH 10.71,prelim_med
+17.403,UL,signal,EH 10.82
+17.425,UL,platform,Riverwood P1,right,end=17.583
+17.425,DL,platform,Riverwood P2,right,end=17.583
+17.587,DL,signal,EH 10.93
+18.105,DL,signal,EH 11.27
+18.305,UL,signal,EH 11.38
+18.679,DL,signal,EH 11.75,route_repeater=/
+19.227,UL,signal,EH 11.92
+19.432,DL,signal,EH 12.07
+20.035,UL,signal,EH 12.46
+20.213,DL,signal,RY 5,absolute,turnout,prelim_med,shunt_route_ind=TR|DE
+20.475,UM,signal,RY 10,absolute,upper_lamps=G_R,lower_lamps=_YR,a_sign
+20.600,UL,signal,RY 11,absolute,upper_lamps=_R,lower_lamps=__R,closeup,subsidiary
+20.600,DL,signal,EH 12.91,lower_lamps=_YR,route_repeater=\
+20.636,UM,signal,RY 13,shunt,ground,shunt_route_ind=TR,facing=down
+20.866,UM,signal,RY 18,absolute,route_repeater=/,subsidiary
+20.866,UL,signal,RY 16,absolute,upper_lamps=YR,lower_lamps=_YR,shunt_route_ind=UE,subsidiary
+21.067,DL,signal,EH 13.09,absolute,upper_lamps=YR,lower_lamps=_YR,a_sign
+21.740,DL,signal,EH 13.51
+21.769,UL,signal,RY 24,absolute
+22.460,UL,signal,EH 13.96
+22.640,DL,signal,EH 14.07
+23.104,DL,signal,EH 1,absolute
+23.200,UL,signal,EH 14.42
+23.670,UL,signal,3A 3B,shunt=triangular,ground,shunt_route_ind=D|U|T
+23.670,DL,signal,EH 5,absolute,turnout,shunt_route_ind=U|T,closeup,subsidiary
+23.671,DL,points,P31,b_track=UL,b_end=23.769
+23.875,T,track,T,end=24.115,render_pos=400,label=Terminating Road,direction=up
+23.790,UL,points,P32,b_track=T,b_end=23.884
+23.832,UL,points,P33,b_track=DL,b_end=23.892
+23.930,T,signal,EH 6,absolute,upper_lamps=YR,lower_lamps=_YR
+23.930,UL,signal,EH 8,absolute,subsidiary
+23.939,T,platform,East Hills P1,end=24.111,right
+23.939,UL,platform,East Hills P2,end=24.111,left
+23.957,DL,platform,East Hills P3,end=24.125,left
+24.125,UL,signal,FR24,absolute,upper_lamps=R,lower_lamps=R,facing=down
+24.160,DL,signal,EH 15.05

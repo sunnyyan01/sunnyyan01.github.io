@@ -16,54 +16,133 @@ function renderLamps(str) {
     }
     return lamps;
 }
+function renderRouteLamps(routes) {
+    let route_lamps = [];
+    for (let route of routes) {
+        let lamp = document.createElement("div");
+        if (route === "\\") lamp.className = "left";
+        else if (route === "/") lamp.className = "right";
+        else lamp.textContent = route;
+        route_lamps.push(lamp);
+    }
+    return route_lamps;
+}
+function renderFeatherLamps(routes) {
+    let lamps = [];
+    for (let route of routes) {
+        let casing = document.createElement("div");
+        casing.className = "casing";
+        for (let i = 0; i < 5; i++) {
+            let lamp = document.createElement("div");
+            lamp.className = "lamp small white";
+            casing.appendChild(lamp);
+        }
+        if (route === "\\")
+            casing.classList.add("left");
+        else if (route === "/")
+            casing.classList.add("right");
+        lamps.push(casing);
+    }
+    return lamps;
+}
+function renderSignalHead(type, lamps) {
+    let head = document.createElement("div");
+    head.classList.add("signal-head");
+    head.classList.add(type);
+
+    head.replaceChildren(...lamps);
+
+    return head;
+}
 let signalDisp = null;
 function renderSignal(e, object) {
-    signalDisp.dataset.dwarf = object.dwarf || object.ground;
+    let isDwarf = object.dwarf || (object.ground && !object.shunt === "triangular");
+    signalDisp.dataset.dwarf = isDwarf;
     signalDisp.dataset.ground = object.ground;
+    signalDisp.replaceChildren();
+
+    // Route Repeater
+    if (object.route_repeater) {
+        signalDisp.appendChild(
+            renderSignalHead(
+                "route-ind",
+                renderRouteLamps(object.route_repeater)
+            )
+        )
+    } else if (object.feather_route_repeater) {
+        signalDisp.appendChild(
+            renderSignalHead(
+                "feather-route-ind",
+                renderFeatherLamps(object.feather_route_repeater)
+            )
+        )
+    }
+
+    // Route Indicator
+    if (object.route_ind) {
+        signalDisp.appendChild(
+            renderSignalHead(
+                "route-ind",
+                renderRouteLamps(object.route_ind.split("|"))
+            )
+        )
+    }
 
     // Upper Head
-    let upperStr;
-    if (object.upper_lamps) {
-        upperStr = object.upper_lamps;
-    } else if (object.shunt) {
-        upperStr = "RYR";
-    } else if (object.turnout || object.ground) {
-        upperStr = "GYR";
-    } else {
-        upperStr = "GR";
+    let hasUpperAsp = !object.shunt && !object.ground;
+    if (hasUpperAsp) {
+        let upperStr;
+        if (object.upper_lamps) {
+            upperStr = object.upper_lamps;
+        } else if (object.turnout) {
+            upperStr = "GYR";
+        } else {
+            upperStr = "GR";
+        }
+        signalDisp.appendChild(
+            renderSignalHead("upper", renderLamps(upperStr))
+        );
     }
-    signalDisp.children[1].replaceChildren(
-        ...renderLamps(upperStr)
-    );
 
     // Lower Head
-    let lowerStr = (
-        (object.lower_lamps || "GYR") +
-        (object.low_speed ? "g" : "")
-    );
-    if (object.ground && !object.lower_lamps)
-        lowerStr = "";
-    signalDisp.children[2].replaceChildren(
-        ...renderLamps(lowerStr)
-    );
-    signalDisp.children[2].dataset.offset = !object.absolute;
+    if (!object.shunt) {
+        let lowerStr = (
+            (object.lower_lamps || "GYR") +
+            (object.low_speed ? "g" : "")
+        );
+        let lowerHead = renderSignalHead("lower", renderLamps(lowerStr));
+        if (hasUpperAsp && !object.absolute)
+            lowerHead.dataset.offset = "right";
+        signalDisp.appendChild(lowerHead);
+    }
 
     // Shunt Route Indicator
-    let routeLamps = [];
     if (object.shunt_route_ind) {
-        for (let route of object.shunt_route_ind.split("|")) {
-            let span = document.createElement("div");
-            span.textContent = route;
-            routeLamps.push(span);
+        let routes = object.shunt_route_ind.split("|");
+        if (
+            (object.shunt === "triangular" || !isDwarf) &&
+            routes.length % 2
+        ) {
+            routes.push("");
         }
+        signalDisp.appendChild(
+            renderSignalHead("shunt-route-ind", renderRouteLamps(routes))
+        )
+        
     }
-    signalDisp.children[3].replaceChildren(...routeLamps);
 
     // Subsidiary Head
-    let subsidStr = object.subsidiary ? "y" : "";
-    signalDisp.children[4].replaceChildren(
-        ...renderLamps(subsidStr)
-    );
+    if (object.subsidiary || object.shunt) {
+        let subsidStr = "y";
+        if (object.shunt) subsidStr = "RYR"
+        else if (object.ground) subsidStr = "Y";
+        let head = renderSignalHead("subsidiary", renderLamps(subsidStr));
+        if (object.shunt === "triangular")
+            head.classList.add("triangular");
+        if (object.subsidiary !== true)
+            head.dataset.offset = object.subsidiary;
+        signalDisp.appendChild(head);
+    }
 }
 
 let speedSignDisplay = null;
@@ -141,13 +220,16 @@ function handleClick(e, object) {
     infobox.dataset.section = object.type;
 
     if (object.type == "signal") {
-        nameDisp.textContent = `Signal ${object.id}`;
+        nameDisp.textContent = `Signal ${object.id} @ ${object.km}km`;
         renderSignal(e, object);
     } else if (object.type == "speed") {
-        nameDisp.textContent = "";
+        nameDisp.textContent = `Speed Sign @ ${object.km}km`;
         renderSpeedSign(e, object);
     } else if (object.type == "track") {
-        nameDisp.textContent = object.label || object.id;
+        let {lineStart, scale} = e.target.parentElement.dataset;
+        let lineName = object.label || object.id;
+        let clickKm = e.offsetX / parseFloat(scale) + parseFloat(lineStart);
+        nameDisp.textContent = `${lineName} @ ${clickKm.toFixed(3)}km`;
     }
     
     noteDisplay.textContent = object.note || "";
@@ -241,6 +323,9 @@ function render(objects, scale) {
     }
 
     renderArea.style.height = maxHeight + 100 + "px";
+    
+    renderArea.dataset.lineStart = lineStart;
+    renderArea.dataset.scale = scale;
 }
 
 async function getCsv(name) {
@@ -253,9 +338,11 @@ async function getCsv(name) {
 }
 
 let lineSelector = null;
+let lineInfo;
+let SCALE = 1600;
 async function changeLine() {
-    let line = await getCsv(lineSelector.value);
-    render(line, 1600);
+    let lineInfo = await getCsv(lineSelector.value);
+    render(lineInfo, SCALE);
 }
 
 window.addEventListener("load", e => {
