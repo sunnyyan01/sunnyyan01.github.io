@@ -1,16 +1,16 @@
-5.600,DB,track,DB,end=13.000,render_pos=200,direction=down,label=Down Bankstown
-5.600,UB,track,UB,end=13.000,render_pos=300,direction=up,label=Up Bankstown
+5.600,DB,track,DB,end=19.000,render_pos=200,direction=down,label=Down Bankstown,gen=40
+5.600,UB,track,UB,end=19.000,render_pos=300,direction=up,label=Up Bankstown
 5.615,XC1,track,XC1,end=5.650,render_pos=100,direction=up,label=XPT Centre Road 1
 5.615,DB,points,P742,b_end=5.630,b_track=XC1
 5.639,UB,signal,SM 620 B,absolute,low_speed,subsidiary
 5.639,XC1,signal,SM 618,shunt,ground,shunt_route_ind=1|2
 5.643,DB,signal,SM 675 B,absolute,turnout,subsidiary,shunt_route_ind=G|B
-5.750,UG,track,UG,end=5.800,render_pos=100,direction=up,label=Up Goods
-5.700,DB,points,P760,b_end=5.779,b_track=UG
+5.750,G,track,G,end=5.800,render_pos=100,direction=up,label=Goods
+5.700,DB,points,P760,b_end=5.779,b_track=G
 5.773,UB,signal,SM 678 B,absolute,subsidiary
-5.779,UG,signal,SM 676 G,absolute,upper_lamps=YR,lower_lamps=YR,subsidiary
+5.779,G,signal,SM 676 G,absolute,upper_lamps=YR,lower_lamps=YR,subsidiary
 5.928,DB,signal,SM 155 B
-6.040,DB,speed,S6.040D,gen=70,mu=70
+6.040,DB,speed,S6.040D,gen=70
 6.040,UB,speed,S6.040U,gen=40
 6.137,UB,signal,SM 680 B
 6.297,DB,signal,SM 157 B
@@ -78,7 +78,7 @@
 11.170,UG,points,P261,b_end=11.258,b_track=DG
 11.240,DB,signal,SM 205 B,absolute,shunt_route_ind=DB|UB,subsidiary,turnout
 11.270,DG,points,P261,b_end=11.358,b_track=UB
-11.340,DB,speed,S11.340,genX=50,muX=50,xAppliesTo=P262
+11.340,DB,speed,S11.340,genX=50,xAppliesTo=P262
 11.380,DB,points,P262,b_end=11.468,b_track=UB
 11.420,UB,speed,S11.420,genX=50,xAppliesTo=P261
 11.601,UB,signal,SM 210 IND,ground,subsidiary,route_ind=B|G,coact=SM 210 B
@@ -96,3 +96,34 @@
 12.235,DB,signal,SM 219 B,absolute,subsidiary
 12.270,UB,speed,S12.270,genX=50,xAppliesTo=P264,facing=down
 12.338,UB,signal,SM 216 B,absolute,subsidiary
+12.689,UB,signal,SM 224 B,absolute,subsidiary
+12.767,DB,signal,SM 227
+13.162,UB,signal,SM 228 B,absolute
+13.347,DB,signal,SM 269
+13.540,UB,signal,SM 270
+13.711,DB,signal,SM 271
+13.942,UB,signal,SM 272
+14.156,DB,signal,SM 273
+14.393,UB,signal,SM 274
+14.562,DB,signal,SM 275
+14.891,UB,signal,SM 276
+14.913,DB,signal,SM 277
+15.260,UB,signal,SM 278
+15.452,DB,signal,SM 279
+15.965,UB,signal,SM 280
+15.990,DB,signal,SM 281
+16.350,UB,signal,SM 282
+16.537,DB,signal,SM 283
+16.976,UB,signal,SM 292
+17.169,DB,signal,SM 299
+17.542,UB,signal,SM 304
+17.793,DB,signal,SM 331,absolute
+18.170,UB,signal,SM 332
+18.386,DB,signal,SM 333,absolute,subsidiary
+18.516,UB,signal,SM 335,shunt,ground,shunt_route_ind=UB|DB,facing=down
+18.616,UB,signal,SM 338,absolute,subsidiary
+18.623,DB,signal,SM 336,absolute,upper_lamps=YR,lower_lamps=YR,subsidiary,facing=up
+18.798,DB,signal,SM 339,absolute,subsidiary,shunt_route_ind=DB|LL
+18.800,UB,signal,SM 341,shunt,ground,facing=down
+18.850,LL,track,LL,end=19.000,render_pos=250,direction=up,label=Loop Line
+18.890,LL,signal,SM 342,shunt,ground,shunt_route_ind=UB|DB

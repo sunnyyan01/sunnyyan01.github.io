@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Track Diagrams</title>
 
+    <script src="constants.js"></script>
     <script src="viewer.js"></script>
     <link rel="stylesheet" href="viewer.css">
 </head>
@@ -15,28 +16,14 @@
     <p>&lt; UP</p>
     <select onChange="changeLine()" id="line-selector">
         <option value="banksCur.csv">Bankstown Line (current)</option>
-        <option value="banks2011.csv">Bankstown Line (2011)</option>
-        <option selected value="easthills2011.csv">East Hills Line (2011)</option>
+        <option selected value="banks2011.csv">Bankstown Line (2011)</option>
+        <option value="easthills2011.csv">East Hills Line (2011)</option>
     </select>
     <p>DOWN &gt;</p>
 </div>
-<div class="infobox" id="infobox">
-    <h3 id="name-display"></h3>
-    <div class="infobox-section" data-type="signal">
-        <div class="signal-display" id="signal-display">
-            <div class="signal-head route-ind"></div>
-            <div class="signal-head upper"></div>
-            <div class="signal-head lower"></div>
-            <div class="signal-head shunt-route-ind"></div>
-            <div class="signal-head subsidiary"></div>
-        </div>
-    </div>
-    <div class="infobox-section" data-type="speed">
-        <div class="speed-sign-display" id="speed-sign-display">
-            
-        </div>
-    </div>
-    <p id="note-display"></p>
+<div class="infobox hover-infobox" id="hover-infobox" data-show="false">
+</div>
+<div class="infobox detail-infobox" id="detail-infobox">
 </div>
 </body>
 </html>

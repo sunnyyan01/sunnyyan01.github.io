@@ -2,7 +2,7 @@ body {
     margin: 0px;
     font-family: sans-serif;
 }
-body > * {
+#render-area, .controls, #detail-infobox {
     width: 90vw;
     margin: auto;
 }
@@ -24,6 +24,26 @@ div.track {
     height: 10px;
     background-color: black;
     z-index: 2;
+}
+div.overlap-strip {
+    box-sizing: border-box;
+    border-top: 3px solid black;
+    border-bottom: 3px solid black;
+    height: 10px;
+    z-index: 3;
+}
+div.overlap-strip.up {
+    transform-origin: 0px 5px;
+    transform: rotate(180deg);
+}
+div.overlap-strip.gen {
+    background-color: #FFDE00;
+}
+div.overlap-strip.med, div.overlap-strip.mu {
+    background-color: #0C4CA1;
+}
+div.overlap-strip.high {
+    background-color: white;
 }
 div.signal, div.speed {
     height: 0;
@@ -81,14 +101,17 @@ div.uncommissioned {
     font-weight: bold;
 }
 
-.infobox-section {
+.infobox[data-show=false] {
     display: none;
 }
-.infobox[data-section=signal] .infobox-section[data-type=signal] {
-    display: block;
-}
-.infobox[data-section=speed] .infobox-section[data-type=speed] {
-    display: block;
+
+.hover-infobox {
+    position: absolute;
+    border-radius: 20px;
+    border: 2px solid grey;
+    background-color: white;
+    padding: 10px;
+    z-index: 10;
 }
 
 .signal-display {

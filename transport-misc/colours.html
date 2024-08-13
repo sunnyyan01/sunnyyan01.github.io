@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sydney Transport Colours</title>
+
+    <style>
+        * {
+            font-family: Arial;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 5px;
+        }
+
+        tr:first-child th {
+            border-right: 1px solid black;
+        }
+        tr:first-child th:last-child {
+            border-right: none;
+        }
+
+        th:first-child {
+            border-right: 1px solid black;
+        }
+
+        td {
+            width: 50px;
+        }
+    </style>
+
+    <script>
+        // Adapted from https://stackoverflow.com/questions/635022/calculating-contrasting-colours-in-javascript
+        function contrastingColor(color) {
+            let rgb = [];
+            for (let i = 0; i <= 2; i++)
+                rgb[i] = parseInt(color.substr(i * 2 + 1, 2), 16);
+            let luma = (0.2126 * rgb[0]) + (0.7152 * rgb[1]) + (0.0722 * rgb[2]); // SMPTE C, Rec. 709 weightings
+            return (luma >= 165) ? '#000' : '#fff';
+        }
+
+        window.addEventListener("load", () => {
+            for (let td of document.getElementsByTagName("td")) {
+                if (td.textContent.startsWith("#")) {
+                    td.style.backgroundColor = td.textContent;
+                    td.style.color = contrastingColor(td.textContent);
+                }
+            }
+        })
+    </script>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Year</th>
+            <th>Source</th>
+            <th>Eastern Suburbs & Illawara</th>
+            <th>South Coast</th>
+            <th>South</th>
+            <th>Inner West</th>
+            <th>Bankstown</th>
+            <th>East Hills</th>
+            <th>Southern Highlands</th>
+            <th>Cumberland</th>
+            <th>Carlingford</th>
+            <th>Olympic Park</th>
+            <th>Western & North Shore</th>
+            <th>Blue Mountains</th>
+            <th>Northern</th>
+            <th>Central Coast & Newcastle</th>
+            <th>Hunter</th>
+        </tr>
+        <tr>
+            <th>1998</th>
+            <th>Website</th>
+            <td>#005EAD</td>
+            <td>#005EAD</td>
+            <td>#348D1A</td>
+            <td>#625591</td>
+            <td>#625591</td>
+            <td>#348D1A</td>
+            <td>#348D1A</td>
+            <td>#AF00A3</td>
+            <td>#00235D</td>
+            <td>#FFC700</td>
+            <td>#FFC700</td>
+            <td>#FFC700</td>
+            <td>#B7002E</td>
+            <td>#B7002E</td>
+            <td>#39089E</td>
+        </tr>
+
+        <tr>
+            <th>2004</th>
+            <th>Website</th>
+            <td>#0072C6</td>
+            <td>#0072C6</td>
+            <td>#90CEF2</td>
+            <td>#8D80B8</td>
+            <td>#FF7800</td>
+            <td>#339E35</td>
+            <td>#339E35</td>
+            <td>#CC00A0</td>
+            <td>#002B7F</td>
+            <td>#EEEEEE</td>
+            <td>#FCB514</td>
+            <td>#FCB514</td>
+            <td>#CE1126</td>
+            <td>#CE1126</td>
+            <td>#6D28AA</td>
+        </tr>
+
+        <tr>
+            <th>2014</th>
+            <th>Website</th>
+            <td>#1b82c5</td>
+            <td>#1b82c5</td>
+            <td>#4b9f47</td>
+            <td>#4b9f47</td>
+            <td>#f26726</td>
+            <td>#4b9f47</td>
+            <td>#4b9f47</td>
+            <td>#cc00a0</td>
+            <td>#002b7f</td>
+            <td>#9aa4a8</td>
+            <td>#f59c00</td>
+            <td>#f59c00</td>
+            <td>#f59c00</td>
+            <td>#cf112b</td>
+            <td>#812f33</td>
+        </tr>
+
+        <tr>
+            <th>2017</th>
+            <th>Website</th>
+            <td>#005AA3</td>
+            <td>#005AA3</td>
+            <td>#0098CD</td>
+            <td>#0098CD</td>
+            <td>#F37021</td>
+            <td>#00954C</td>
+            <td>#00954C</td>
+            <td>#C4258F</td>
+            <td>#456CAA</td>
+            <td>#6F818E</td>
+            <td>#F99D1C</td>
+            <td>#F99D1C</td>
+            <td>#F99D1C</td>
+            <td>#D11F2F</td>
+            <td>#833134</td>
+        </tr>
+
+        <tr>
+            <th>2019</th>
+            <th>GTFS</th>
+            <td>#005AA3</td>
+            <td>#005AA3</td>
+            <td>#0098CD</td>
+            <td>#0098CD</td>
+            <td>#F37021</td>
+            <td>#00954C</td>
+            <td>#00954C</td>
+            <td>#C4258F</td>
+            <td></td>
+            <td>#6F818E</td>
+            <td>#F99D1C</td>
+            <td>#F99D1C</td>
+            <td>#D11F2F</td>
+            <td>#D11F2F</td>
+            <td>#833134</td>
+        </tr>
+    </table>
+</body>
+</html>

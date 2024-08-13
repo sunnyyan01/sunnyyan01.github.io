@@ -1,12 +1,3 @@
-const COLOUR_MAP = {
-    "G": "green",
-    "g": "green small",
-    "Y": "yellow",
-    "y": "yellow small",
-    "R": "red",
-    "r": "red small",
-    "_": "blank",
-}
 function renderLamps(str) {
     let lamps = []
     for (let char of str) {
@@ -54,9 +45,12 @@ function renderSignalHead(type, lamps) {
 
     return head;
 }
-let signalDisp = null;
+
 function renderSignal(e, object) {
-    let isDwarf = object.dwarf || (object.ground && !object.shunt === "triangular");
+    let signalDisp = document.createElement("div");
+    signalDisp.className = "signal-display";
+
+    let isDwarf = object.dwarf || (object.ground && object.shunt !== "triangular");
     signalDisp.dataset.dwarf = isDwarf;
     signalDisp.dataset.ground = object.ground;
     signalDisp.replaceChildren();
@@ -143,20 +137,47 @@ function renderSignal(e, object) {
             head.dataset.offset = object.subsidiary;
         signalDisp.appendChild(head);
     }
+
+    return signalDisp;
 }
 
-let speedSignDisplay = null;
-let SIGN_TYPES = {
-    "newGen": ["square", "yellow"],
-    "newMed": ["square", "blue"],
-    "newHigh": ["square", "white"],
-    "gen": ["arrow", "yellow"],
-    "mu": ["arrow", "white"],
-    "high": ["arrow", "white"],
-    "genX": ["arrow", "yellow", "x"],
-    "muX": ["arrow", "white", "x"],
-    "highX": ["arrow", "white", "x"],
-};
+function displayOverlap(e, object) {
+    // Remove previous strips
+    let overlapStrips = renderArea.getElementsByClassName("overlap-strip");
+    while (overlapStrips[0])
+        renderArea.removeChild(overlapStrips[0]);
+
+    let signal = e.currentTarget;
+
+    // Find current speed limit
+    let facing = object.facing || diagram.by_id(object.track).direction;
+    let direction = facing === "up" ? 1 : -1;
+    let lastSpeed = diagram.linearSearch(object.idx, direction, obj => (
+        obj.track === object.track &&
+        obj.isRegSpeedSign()
+    ));
+    console.log(lastSpeed);
+    if (!lastSpeed) return;
+
+    for (let [key, val] of Object.entries(lastSpeed)) {
+        let match = key.match(/(gen|med|high|mu)([^X]|$)/);
+        if (!match) continue;
+        let type = match[1];
+
+        // Create strip and place at same position as signal
+        let overlapStrip = document.createElement("div");
+        overlapStrip.className = `overlap-strip ${type} ${facing}`;
+        overlapStrip.style.left = signal.style.left;
+        overlapStrip.style.top = signal.style.top;
+
+        // Calculate and set length
+        let overlapLen = BRAKE_CURVES[type][val / 5];
+        overlapStrip.style.width = overlapLen / 1000 * renderArea.dataset.scale + "px";
+        overlapStrip.title = `Overlap for signal ${object.id}: ${overlapLen}m`
+        renderArea.appendChild(overlapStrip);
+    }
+}
+
 SVG_NS = "http://www.w3.org/2000/svg"
 function renderSpeedSign(e, object) {
     let signs = [];
@@ -210,21 +231,34 @@ function renderSpeedSign(e, object) {
 
         signs.push(sign);
     }
+
+    let speedSignDisplay = document.createElement("div");
+    speedSignDisplay.className = "speed-sign-display";
     speedSignDisplay.replaceChildren(...signs);
+    return speedSignDisplay;
 }
 
-let nameDisp = null;
-let infobox = null;
-let noteDisplay = null;
-function handleClick(e, object) {
-    infobox.dataset.section = object.type;
+let hoverInfobox = null;
+let detailInfobox = null;
+function openInfobox(e, object, type) {
+    let infobox = type === "hover" ? hoverInfobox : detailInfobox;
+    infobox.replaceChildren();
+
+    if (type === "hover") {
+        infobox.style.left = e.pageX + "px";
+        infobox.style.top = e.pageY + "px";
+    }
+
+    let nameDisp = document.createElement("h3");
+    infobox.appendChild(nameDisp);
 
     if (object.type == "signal") {
+        if (type === "click") displayOverlap(e, object);
         nameDisp.textContent = `Signal ${object.id} @ ${object.km}km`;
-        renderSignal(e, object);
+        infobox.appendChild(renderSignal(e, object));
     } else if (object.type == "speed") {
         nameDisp.textContent = `Speed Sign @ ${object.km}km`;
-        renderSpeedSign(e, object);
+        infobox.appendChild(renderSpeedSign(e, object));
     } else if (object.type == "track") {
         let {lineStart, scale} = e.target.parentElement.dataset;
         let lineName = object.label || object.id;
@@ -232,49 +266,44 @@ function handleClick(e, object) {
         nameDisp.textContent = `${lineName} @ ${clickKm.toFixed(3)}km`;
     }
     
-    noteDisplay.textContent = object.note || "";
-}
-
-function parseParams(params) {
-    let out = {};
-    for (let param of params) {
-        let [key, val] = param.split("=");
-        out[key] = val || true;
+    if (object.note) {
+        let noteDisplay = document.createElement("p");
+        noteDisplay.textContent = object.note;
+        infobox.appendChild(noteDisplay);
     }
-    return out;
+
+    if (type === "hover")
+        infobox.dataset.show = true;
+}
+function closeInfobox() {
+    hoverInfobox.dataset.show = false;
 }
 
-function render(objects, scale) {
-    let renderArea = document.getElementById("render-area");
+function render(diagram, scale) {
     renderArea.replaceChildren();
-    let lineStart = -1;
+    let lineStart = diagram.by_idx(0).km;
     let maxHeight = 0;
-    let trackInfo = {};
 
-    for (let object of objects) {
-        let [km, track, type, id, ...params] = object;
+    for (let object of diagram.list) {
+        let {km, track, type, id, idx} = object;
 
-        params = parseParams(params);
         if (type === "track") {
-            trackInfo[id] = params;
-            if (maxHeight < params.render_pos)
-                maxHeight = parseInt(params.render_pos);
+            if (maxHeight < object.render_pos)
+                maxHeight = parseInt(object.render_pos);
         }
-
-        if (lineStart == -1) lineStart = km;
 
         let element = document.createElement("div");
         element.id = id;
+        element.dataset.idx = idx;
         element.className = type;
         element.style.left = (km - lineStart) * scale + "px";
-        element.style.top = trackInfo[track].render_pos + "px";
-        element.title = params.label || element.id;
+        element.style.top = diagram.by_id(track).render_pos + "px";
 
         if (type == "signal" || type == "speed") {
-            let facing = params.facing || trackInfo[track].direction;
+            let facing = object.facing || diagram.by_id(track).direction;
 
             let offset = facing == "up" ? 20 : -20;
-            if (params.position == "right") {
+            if (object.position == "right") {
                 offset *= -1;
             }
             element.style.transform = `translate(0px, ${offset}px)`;
@@ -282,18 +311,18 @@ function render(objects, scale) {
             element.dataset.facing = facing;
         }
 
-        if (params.style) {
-            for (let sName of params.style.split("|"))
+        if (object.style) {
+            for (let sName of object.style.split("|"))
                 element.classList.add(sName);
         }
 
         if (type == "track" || type == "platform") {
-            element.style.width = (params.end - km) * scale + "px";
+            element.style.width = (object.end - km) * scale + "px";
         }
         
         if (type == "points") {
-            let horizLen = (params.b_end - km) * scale;
-            let vertLen = trackInfo[params.b_track].render_pos - trackInfo[track].render_pos;
+            let horizLen = (object.b_end - km) * scale;
+            let vertLen = diagram.by_id(object.b_track).render_pos - diagram.by_id(track).render_pos;
             let diagLen = Math.sqrt(horizLen * horizLen + vertLen * vertLen);
             element.style.width = diagLen + "px";
 
@@ -304,10 +333,10 @@ function render(objects, scale) {
         if (type == "platform") {
             element.textContent = id;
 
-            let direction = trackInfo[track].direction;
+            let direction = diagram.by_id(track).direction;
             if (
-                (params.left && direction == "up") ||
-                (params.right && direction == "down")
+                (object.left && direction == "up") ||
+                (object.right && direction == "down")
             ) {
                 element.dataset.facing = "up";
             } else {
@@ -315,8 +344,14 @@ function render(objects, scale) {
             }
         }
 
+        if (type == "signal" || type == "speed") {
+            element.addEventListener(
+                "mouseenter", e => openInfobox(e, object, "hover")
+            );
+            element.addEventListener("mouseout", closeInfobox);
+        }
         element.addEventListener(
-            "click", e => handleClick(e, {km, track, type, id, ...params})
+            "click", e => openInfobox(e, object, "click")
         );
 
         renderArea.appendChild(element);
@@ -328,30 +363,91 @@ function render(objects, scale) {
     renderArea.dataset.scale = scale;
 }
 
+class Diagram {
+    constructor() {
+        this.list = [];
+        this.dict = {};
+    }
+
+    addObject(object) {
+        this.list.push(object);
+        object.idx = this.list.length - 1;
+        this.dict[object.id] = object;
+    }
+
+    by_id(id) {
+        return this.dict[id];
+    }
+    by_idx(idx) {
+        return this.list[idx];
+    }
+
+    linearSearch(start, direction, pred) {
+        for (let i = start; i >= 0 && i < this.list.length; i += direction) {
+            if (pred(this.list[i])) return this.list[i];
+        }
+        return null;
+    }
+}
+
+class DiagramObject {
+    constructor(km, track, type, id, params) {
+        this.km = km;
+        this.track = track;
+        this.type = type;
+        this.id = id;
+        this.idx = -1;
+        for (let [key,val] of Object.entries(params)) {
+            this[key] = val;
+        }
+    }
+
+    static fromCsv(line) {
+        let [km, track, type, id, ...rawParams] = line.split(",");
+        let params = {};
+        for (let param of rawParams) {
+            let [key, val] = param.split("=");
+            params[key] = val || true;
+        }
+        return new DiagramObject(km, track, type, id, params);
+    }
+
+    isRegSpeedSign() {
+        for (let key of Object.keys(this)) {
+            if (key.match(/(gen|med|high|mu)([^X]|$)/))
+                return true;
+        }
+        return false;
+    }
+}
+
 async function getCsv(name) {
     let resp = await fetch(name);
     let text = await resp.text();
     let newline = text.includes("\r") ? "\r\n" : "\n";
     let lines = text.trim().split(newline);
-    let objects = lines.map(line => line.split(","));
-    return objects;
+    let diagram = new Diagram();
+    for (let line of lines) {
+        diagram.addObject(DiagramObject.fromCsv(line));
+    }
+    return diagram;
 }
 
 let lineSelector = null;
-let lineInfo;
+let diagram;
 let SCALE = 1600;
 async function changeLine() {
-    let lineInfo = await getCsv(lineSelector.value);
-    render(lineInfo, SCALE);
+    diagram = await getCsv(lineSelector.value);
+    render(diagram, SCALE);
 }
 
+let renderArea;
 window.addEventListener("load", e => {
+    renderArea = document.getElementById("render-area");
+
     lineSelector = document.getElementById("line-selector");
     changeLine()
 
-    nameDisp = document.getElementById("name-display");
-    infobox = document.getElementById("infobox");
-    signalDisp = document.getElementById("signal-display");
-    speedSignDisplay = document.getElementById("speed-sign-display");
-    noteDisplay = document.getElementById("note-display");
+    detailInfobox = document.getElementById("detail-infobox");
+    hoverInfobox = document.getElementById("hover-infobox");
 })
