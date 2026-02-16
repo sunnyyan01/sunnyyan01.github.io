@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barcode Scanner</title>
+
+    <script type="text/javascript" src="https://unpkg.com/@zxing/browser@latest"></script>
+    <script type="text/javascript" src="./BarcodeParser.js"></script>
+    <script type="text/javascript" src="./barcode-scanner.js"></script>
+
+    <link rel="stylesheet" href="barcode-scanner.css">
+</head>
+<body>
+    <video id="preview"></video>
+    <div class="button text-button" style="width: 100px" onclick="startScanner()">Scan</div>
+
+    <div class="toggle-button-group">
+        <div
+            class="button text-button selected"
+            data-type="ww-dm"
+            onclick="changeType(this)"
+        >
+            Woolworths GS1
+        </div>
+        <div
+            class="button text-button"
+            data-type="ww-128"
+            onclick="changeType(this)"
+        >
+            Woolworths/Big W 128
+        </div>
+        <div
+            class="button text-button"
+            data-type="coles-128"
+            onclick="changeType(this)"
+        >
+            Coles 128
+        </div>
+    </div>
+    <div id="info">
+
+    </div>
+</body>
+</html>
