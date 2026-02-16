@@ -5,6 +5,9 @@ body {
     BlinkMacSystemFont,
     sans-serif;
 }
+p {
+  margin: 0px;
+}
 
 video {
   max-height: 50vh;
@@ -13,12 +16,17 @@ video {
 #info {
   width: 400px;
 }
-#info div {
+#info .row {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  height: 30px;
+}
+#info .row:nth-child(even) {
+  background-color: #ddd;
+}
+#info .row.indent {
+  padding-left: 10px;
 }
 
 .toggle-button-group {

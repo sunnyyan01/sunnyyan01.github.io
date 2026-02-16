@@ -19,18 +19,34 @@ function formatDateTime(datetime) {
   );
   return `${day}/${month}/${year} ${hour}:${min}:${sec}`;
 }
+function formatPrice(cents) {
+  return "$" + (parseInt(cents) / 100).toFixed(2);
+}
 
+function renderRow(key, val) {
+  let div = document.createElement("div");
+  div.className = "row";
+  let b = document.createElement("b");
+  b.textContent = key;
+  let p = document.createElement("p");
+  p.textContent = val;
+  div.replaceChildren(b, p);
+  info.appendChild(div);
+  return [div, b, p];
+}
 function renderTable(data) {
   info.replaceChildren();
   for (let [key, val] of Object.entries(data)) {
-    let div = document.createElement("div");
-    div.className = "row";
-    let b = document.createElement("b");
-    b.textContent = key;
-    let p = document.createElement("p");
-    p.textContent = val;
-    div.replaceChildren(b, p);
-    info.appendChild(div);
+    renderRow(key, val);
+
+    if (key == "GTIN" && val[0] == "2") {
+      let [_, id, price] = data.GTIN.match(/2([0-9]{6})([0-9]{5})[0-9]/);
+
+      let [div] = renderRow("Internal Product ID", id);
+      div.classList.add("indent");
+      ([div] = renderRow("Original Price", formatPrice(price)));
+      div.classList.add("indent");
+    }
   }
 }
 
@@ -53,7 +69,7 @@ function parseWoolworthsDM(string) {
       data = formatDateTime(data);
     } else if (ai == "91") {
       dataTitle = "Was Price";
-      data = "$" + (parseInt(data) / 100).toFixed(2);
+      data = formatPrice(data);
     }
 
     output[dataTitle] = data;
@@ -63,27 +79,26 @@ function parseWoolworthsDM(string) {
 }
 
 function parseWoolworths128(string) {
-  let [_, GTIN, price, check] = string.match(/91([0-9]{13})([0-9]{5})([0-9])/);
+  let [_, GTIN, price, check] = string.match(/^91([0-9]{13})([0-9]{5,6})([0-9])$/);
   renderTable({
     GTIN,
-    Price: "$" + (parseInt(price) / 100).toFixed(2),
+    Price: formatPrice(price),
     "Check Digit": check,
   });
 }
 
 function parseColes128(string) {
   let [_, GTIN, price, year, month, day, check] = string.match(
-    /910([0-9]{13})([0-9]{5})([0-9]{2})([0-9]{2})([0-9]{2})([0-9])/,
+    /^910([0-9]{13})([0-9]{5})([0-9]{2})([0-9]{2})([0-9]{2})([0-9])$/,
   );
   renderTable({
     GTIN,
-    Price: "$" + (parseInt(price) / 100).toFixed(2),
+    Price: formatPrice(price),
     "Sell By": `${day}/${month}/${year}`,
     "Check Digit": check,
   });
 }
 
-let interval;
 async function startScanner() {
   let stream = await navigator.mediaDevices.getUserMedia({
     video: { facingMode: "environment" },
@@ -101,8 +116,7 @@ async function startScanner() {
     parseWoolworthsDM(text);
   } else if (type == "ww-128") {
     parseWoolworths128(text);
-  } else {
-    //coles-128
+  } else { //coles-128
     parseColes128(text);
   }
   videoElement.src = "";
