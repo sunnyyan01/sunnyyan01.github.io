@@ -1,9 +1,11 @@
 const CODE_128 = 4;
 const DATA_MATRIX = 5;
+const EAN_8 = 6;
+const EAN_13 = 7;
 
-let type = "ww-dm";
-function changeType(btn) {
-  type = btn.dataset.type;
+let store = "ww";
+function changeStore(btn) {
+  store = btn.dataset.type;
   document.querySelector(".selected").classList.remove("selected");
   btn.classList.add("selected");
 }
@@ -15,7 +17,7 @@ window.onload = () => {
 
 function formatDateTime(datetime) {
   let [_, year, month, day, hour, min, sec] = datetime.match(
-    /([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})/,
+    /(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/,
   );
   return `${day}/${month}/${year} ${hour}:${min}:${sec}`;
 }
@@ -23,9 +25,9 @@ function formatPrice(cents) {
   return "$" + (parseInt(cents) / 100).toFixed(2);
 }
 
-function renderRow(key, val) {
+function renderRow(key, val, indent) {
   let div = document.createElement("div");
-  div.className = "row";
+  div.className = indent ? "row indent" : "row";
   let b = document.createElement("b");
   b.textContent = key;
   let p = document.createElement("p");
@@ -36,67 +38,110 @@ function renderRow(key, val) {
 }
 function renderTable(data) {
   info.replaceChildren();
-  for (let [key, val] of Object.entries(data)) {
-    renderRow(key, val);
-
-    if (key == "GTIN" && val[0] == "2") {
-      let [_, id, price] = data.GTIN.match(/2([0-9]{6})([0-9]{5})[0-9]/);
-
-      let [div] = renderRow("Internal Product ID", id);
-      div.classList.add("indent");
-      ([div] = renderRow("Original Price", formatPrice(price)));
-      div.classList.add("indent");
+  for (let [key, val] of data) {
+    let indent = false;
+    if (key[0] == '>') {
+      key = key.slice(1);
+      indent = true;
     }
+    renderRow(key, val, indent);
   }
 }
 
-function parseWoolworthsDM(string) {
+function parseWoolworths(format, string) {
+  let parseCustomEAN = (ean) => {
+    let match = ean.match(/2(\d{6})(\d{5})\d/);
+    if (match) {
+      let [_, id, price] = match;
+      return [
+        [">Internal Product ID", id],
+        [">Original Price", formatPrice(price)],
+      ]
+    } else {
+      return [];
+    }
+  }
+
+  if (format == EAN_8) {
+    return renderTable(["GTIN", string]);
+  } else if (format == EAN_13) {
+    return renderTable([
+      ["GTIN", string],
+      ...parseCustomEAN(string),
+    ]);
+  } else if (format == CODE_128) {
+    let [_, GTIN, price, check] = string.match(/^91(\d{13})(\d{6})(\d)$/);
+    return renderTable([
+      ["GTIN", GTIN],
+      ...parseCustomEAN(GTIN),
+      ["Price", formatPrice(price)],
+      ["Check Digit", check],
+    ]);
+  }
+
   string = string.replace(/^\x1D/, "");
   let { parsedCodeItems } = parseBarcode(string);
 
-  let output = {};
+  let output = [];
   for (let codeItem of parsedCodeItems) {
     let { ai, dataTitle, data } = codeItem;
     if (ai == "01") {
       data = data.replace(/^0+/, "");
+      output.push(
+        [dataTitle, data],
+        ...parseCustomEAN(data),
+      );
     } else if (ai >= "11" && ai <= "17") {
-      data = data.toLocaleDateString();
+      output.push([dataTitle, data.toLocaleDateString()]);
     } else if (ai == "30") {
-      data = data.replace(/^0+/, "");
+      output.push([dataTitle, data.replace(/^0+/, "")]);
     } else if (ai.startsWith("392")) {
-      data = "$" + data.toFixed(2);
+      output.push([dataTitle, "$" + data.toFixed(2)]);
     } else if (ai == "8008") {
-      data = formatDateTime(data);
+      output.push([dataTitle, formatDateTime(data)]);
     } else if (ai == "91") {
-      dataTitle = "Was Price";
-      data = formatPrice(data);
+      output.push(["Was Price", formatPrice(data)]);
+    } else {
+      output.push([dataTitle, data]);
     }
-
-    output[dataTitle] = data;
   }
 
   renderTable(output);
 }
 
-function parseWoolworths128(string) {
-  let [_, GTIN, price, check] = string.match(/^91([0-9]{13})([0-9]{5,6})([0-9])$/);
-  renderTable({
-    GTIN,
-    Price: formatPrice(price),
-    "Check Digit": check,
-  });
-}
+function parseColes(format, string) {
+  let parseCustomEAN = (ean) => {
+    let match = ean.match(/^02(\d{5})\d(\d{4})\d$/);
+    if (match) {
+      let [_, id, price] = match;
+      return [
+        [">Internal Product ID", id],
+        [">Original Price", formatPrice(price)],
+      ]
+    } else {
+      return [];
+    }
+  }
 
-function parseColes128(string) {
+  if (format == EAN_8) {
+    return renderTable(["GTIN", string]);
+  } else if (format == EAN_13) {
+    return renderTable([
+      ["GTIN", string],
+      ...parseCustomEAN(string),
+    ]);
+  }
+
   let [_, GTIN, price, year, month, day, check] = string.match(
-    /^910([0-9]{13})([0-9]{5})([0-9]{2})([0-9]{2})([0-9]{2})([0-9])$/,
+    /^910(\d{13})(\d{5})(\d{2})(\d{2})(\d{2})(\d)$/,
   );
-  renderTable({
-    GTIN,
-    Price: formatPrice(price),
-    "Sell By": `${day}/${month}/${year}`,
-    "Check Digit": check,
-  });
+  return renderTable([
+    ["GTIN", GTIN],
+    ...parseCustomEAN(GTIN),
+    ["Price", formatPrice(price)],
+    ["Sell By", `${year}/${month}/${day}`],
+    ["Check Digit", check],
+  ]);
 }
 
 async function startScanner() {
@@ -110,14 +155,12 @@ async function startScanner() {
   videoElement.play();
 
   let codeReader = new ZXingBrowser.BrowserMultiFormatReader();
-  codeReader.possibleFormats = ["DATA_MATRIX", "CODE_128"];
   let { format, text } = await codeReader.decodeOnceFromStream(stream);
-  if (type == "ww-dm") {
-    parseWoolworthsDM(text);
-  } else if (type == "ww-128") {
-    parseWoolworths128(text);
-  } else { //coles-128
-    parseColes128(text);
+  console.log(text);
+  if (store == "ww") {
+    parseWoolworths(format, text);
+  } else { //coles
+    parseColes(format, text);
   }
   videoElement.src = "";
 }

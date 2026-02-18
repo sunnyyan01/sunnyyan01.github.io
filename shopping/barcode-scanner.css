@@ -54,12 +54,18 @@ video {
     color: black;
     opacity: 0.7;
 }
+.button[data-store=ww]:hover, .button[data-store=ww].selected {
+    background-color: green;
+    color: white;
+}
+.button[data-store=coles]:hover, .button[data-store=coles].selected {
+    background-color: red;
+    color: white;
+}
 .toggle-button-group .button {
     border-radius: 0px;
 }
 .toggle-button-group .button.selected {
-    background-color: limegreen;
-    color: black;
     opacity: 1;
 }
 .toggle-button-group .button:first-child {
