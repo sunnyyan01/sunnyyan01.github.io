@@ -1,0 +1,135 @@
+body {
+    margin: 0px 10px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
+}
+
+#gift-card-sample {
+    display: none;
+}
+
+#gift-cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 5px;
+}
+.gift-card {
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid black;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+.gift-card.selected {
+    border-color: blue;
+}
+.gift-card > * {
+    margin: 0px;
+}
+
+#panel1, #panel2 {
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+}
+#panel2[data-tab=none] {
+    display: none;
+}
+#panel2 > * {
+    display: none;
+    width: 100%;
+}
+#panel2[data-tab=add] #add-gift-card {
+    display: flex;
+    flex-direction: column;
+}
+#panel2[data-tab=cam] #scan-gift-card {
+    display: unset;
+    height: 50vh;
+}
+#panel2[data-tab=view] #view-gift-card {
+    display: unset;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    opacity: 0.7;
+    border: 1px solid black;
+    border-radius: 0px;
+    margin: 0px;
+    border-radius: 10px;
+    padding: 10px;
+    transition: all 0.1s ease-in-out;
+}
+.button:hover {
+    cursor: pointer;
+    background-color: limegreen;
+    color: black;
+    opacity: 0.7;
+}
+.button:active {
+    transform: translate(2px, 2px);
+}
+
+.barcode {
+  font-family: "Libre Barcode 128", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 7.5vh;
+}
+
+#add-gift-card .row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 5px;
+}
+#add-gift-card input {
+    padding: 5px 2px;
+    border-radius: 5px;
+    width: 30ex;
+}
+#add-gift-card label {
+    margin-right: auto;
+}
+
+#gift-card-cam {
+    max-height: 90%;
+    max-width: 100%;
+}
+
+#view-gift-card {
+    position: relative;
+}
+#view-gift-card h2.type {
+    margin-top: 0px;
+}
+#view-gift-card .close-button {
+    position: absolute;
+    right: 0px;
+}
+#view-gift-card .barcode-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#view-gift-card .barcode-container .num {
+    position: absolute;
+    bottom: 5px;
+    margin: 0px auto;
+}
+#view-gift-card .spend {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+#view-gift-card .spend input {
+    padding: 5px;
+    margin-right: 10px;
+}

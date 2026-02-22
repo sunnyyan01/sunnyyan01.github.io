@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gift Cards</title>
+
+    <script type="text/javascript" src="https://unpkg.com/@zxing/browser@latest"></script>
+    <script src="gift-cards.js"></script>
+
+    <link rel="stylesheet" href="gift-cards.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+128&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="panel1">
+        <h1>Gift Cards</h1>
+        <div id="gift-card-sample" class="gift-card">
+            <h2 class="gc-type"></h2>
+            <p>Balance: <span class="gc-balance"></span></p>
+        </div>
+        <div id="gift-cards">
+        </div>
+        <div class="button" onclick="changeTab('add')">Add card</div>
+    </div>
+    <div id="panel2" data-tab="none">
+        <form id="add-gift-card">
+            <div class="button close-button" onclick="changeTab('none')">❌</div>
+            <div class="row">
+                <label>Type:</label>
+                <input type="text" name="gc-type" />
+                <div></div>
+            </div>
+            <div class="row">
+                <label>Number:</label>
+                <div>
+                    <input type="text" name="gc-num" onchange="onGcNumChange()" />
+                    <div class="button" onclick="scanGiftCard()">📷</div>
+                </div>
+            </div>
+            <div class="row">
+                <label>Balance:</label>
+                <div>
+                    <input type="number" name="gc-bal" />
+                </div>
+            </div>
+            <div class="row">
+                <label>PIN: </label>
+                <input type="text" name="gc-pin" />
+                <div></div>
+            </div>
+            <div class="button" onclick="addGiftCard()">
+                Add
+            </div>
+        </form>
+        <div id="scan-gift-card">
+            <div class="button close-button" onclick="changeTab('add')">❌</div>
+            <video id="gift-card-cam"></video>
+        </div>
+        <div id="view-gift-card">
+            <div class="button close-button" onclick="changeTab('none')">❌</div>
+            <h2 class="type"></h2>
+            <div class="barcode-container">
+                <div class="barcode"></div>
+                <p class="num"></p>
+            </div>
+            <p class="pin">PIN: <span></span></p>
+            <div class="spend">
+                <label>
+                    Spend:
+                    <input type="number" name="spend"></input>
+                </label>
+                <div class="button" onclick="spendGiftCard()">▶</div>
+            </div>
+            <div class="button" onclick="deleteGiftCard()">Delete</div>
+        </div>
+    </div>
+</body>
+</html>
