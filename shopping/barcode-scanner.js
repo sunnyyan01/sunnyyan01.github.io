@@ -63,15 +63,29 @@ function parseWoolworths(format, string) {
   }
 
   if (format == EAN_8) {
-    return renderTable(["GTIN", string]);
+    return renderTable([
+      ["Barcode Type", "Prdouct Barcode"],
+      ["GTIN", string],
+    ]);
   } else if (format == EAN_13) {
     return renderTable([
+      ["Barcode Type", "Prdouct Barcode"],
       ["GTIN", string],
       ...parseCustomEAN(string),
     ]);
   } else if (format == CODE_128) {
-    let [_, GTIN, price, check] = string.match(/^91(\d{13})(\d{6})(\d)$/);
+    let [_, receiptBarcode, store, pos, trans, date, markdownBarcode, GTIN, price, check] = string.match(/^(629(\d{4})(\d{3})(\d{4})(\d{6}))|(91(\d{13})(\d{6})(\d))$/);
+    if (receiptBarcode) {
+      return renderTable([
+        ["Type", "Receipt Barcode"],
+        ["Store Number", store],
+        ["Register Number", pos],
+        ["Transaction Number", trans],
+        ["Transaction Date", date],
+      ]);
+    }
     return renderTable([
+      ["Type", "Markdown Barcode"],
       ["GTIN", GTIN],
       ...parseCustomEAN(GTIN),
       ["Price", formatPrice(price)],
@@ -124,18 +138,32 @@ function parseColes(format, string) {
   }
 
   if (format == EAN_8) {
-    return renderTable(["GTIN", string]);
+    return renderTable([
+      ["Barcode Type", "Prdouct Barcode"],
+      ["GTIN", string],
+    ]);
   } else if (format == EAN_13) {
     return renderTable([
+      ["Barcode Type", "Product Barcode"],
       ["GTIN", string],
       ...parseCustomEAN(string),
     ]);
   }
 
-  let [_, GTIN, price, year, month, day, check] = string.match(
-    /^910(\d{13})(\d{5})(\d{2})(\d{2})(\d{2})(\d)$/,
+  let [_, receiptBarcode, date, store, pos, trans, markdownBarcode, GTIN, price, year, month, day, check] = string.match(
+    /^(1(\d{6})(\d{4})(\d{3})(\d{4})00)|(910(\d{13})(\d{5})(\d{2})(\d{2})(\d{2})(\d))$/,
   );
+  if (receiptBarcode) {
+    return renderTable([
+      ["Barcode Type", "Receipt Barcode"],
+      ["Store Number", store],
+      ["Register Number", pos],
+      ["Transaction Number", trans],
+      ["Transaction Date", date],
+    ])
+  }
   return renderTable([
+    ["Barcode Type", "Markdown Barcode"],
     ["GTIN", GTIN],
     ...parseCustomEAN(GTIN),
     ["Price", formatPrice(price)],
