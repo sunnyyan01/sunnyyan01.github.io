@@ -28,8 +28,12 @@ async function scanGiftCard() {
 }
 
 let GC_TYPE_REGEXES = [
-    ["Coles Group + Myer", /9800935396700[0-9]{17}/],
-    ["Coles", /9801935396600[0-9]{17}/],
+    ["Coles Group + Myer", /(9800935396700)([0-9]{17})/],
+    ["Coles", /(9801935396600)([0-9]{17})/],
+    ["Woolworths", /(\d{13})?(628000)(721)(\d{10})/],
+    ["EG", /(\d{13})?(628000)(551)(\d{10})/],
+    ["Everyday Wish", /(\d{13})?(628000)(561)(\d{10})/],
+    ["Woolworths & Big W", /(\d{13})?(628000)(961)(\d{10})/],
 ];
 function onGcNumChange() {
     let cardNum = document.querySelector("#add-gift-card input[name=gc-num]").value;
@@ -67,13 +71,26 @@ function balFormat(cents) {
 }
 
 function encodeBarcode(num) {
-    let out = String.fromCodePoint(205);
+    let out = String.fromCodePoint(205); // Start code C
+    let sum = 105;
+    let weight = 1;
     for (let i = 0; i < num.length - 1; i += 2) {
         let pair = (num[i] - '0') * 10 + (num[i + 1] - '0');
         let offset = pair <= 94 ? 32 : 100;
         out += String.fromCodePoint(pair + offset);
+        sum += pair * weight++;
     }
-    return out + String.fromCodePoint(206);
+    if ((num.length % 2) == 1) {
+        out += String.fromCodePoint(200); // Switch code B
+        sum += 100 * weight++;
+        out += num.at(-1); // Add final number in code B
+        sum += (num.at(-1) - '0' + 16) * weight++;
+    }
+    // Add check digit
+    sum %= 103;
+    let offset = sum <= 94 ? 32 : 100;
+    out += String.fromCodePoint(sum + offset);
+    return out + String.fromCodePoint(206); // Stop
 }
 
 function renderGiftCard({type, num, balance}) {
@@ -100,10 +117,16 @@ function openGiftCard(e) {
 
     let num = e.currentTarget.dataset.gcNum;
     let {type, balance, pin} = gcs[num];
+
     let barcode = encodeBarcode(num);
-    let numGroups = [num.slice(0, 4)];
-    for (let i = 4; i < num.length; i += 4) {
-        numGroups.push(num.slice(i, i+4));
+
+    let match = num.match(GC_TYPE_REGEXES.find(x => x[0] == type)[1]);
+    let numGroups = [];
+    for (let group of match.slice(1)) {
+        if (!group) continue;
+        for (let i = 0; i < group.length; i += 4) {
+            numGroups.push(group.slice(i, i+4));
+        }
     }
 
     document.querySelector("#view-gift-card").dataset.gcNum = num;
