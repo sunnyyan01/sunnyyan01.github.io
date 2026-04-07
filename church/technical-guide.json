@@ -1,0 +1,498 @@
+{
+  "church-presenter-setup": {
+    "title_en": "",
+    "title_zh": "",
+    "steps": [
+      [
+        {
+          "en": "Open the online version of Church Presenter at:",
+          "zh": "打开Church Presenter 网上版:"
+        },
+        {
+          "link": "https://church-presenter-v1.vercel.app/"
+        }
+      ],
+      [
+        {
+          "en": "Click 'New Slide'",
+          "zh": "按 创新幻灯片"
+        }
+      ],
+      [
+        {
+          "en": "First select the type of slide under the subtype dropdown.\nChoose from welcome, bible, song, title or image.",
+          "zh": "在subtype里，选择幻灯片类型。可选欢迎、读经、诗歌、标题或图片。"
+        },
+        {
+          "img": "images/slide-types.png"
+        }
+      ],
+      [
+        {
+          "en": "Fill out the slide details, then click save. For the bible slide, only title and location are required, you can leave the rest blank. Click the book icon at the top to automatically lookup the verse.",
+          "zh": "输入其他资料然后按save。读经幻片只需要填title(例如: 证道经文)和location(例如：马太福音1:1)。在上方可以按书标志来自动输入经文。"
+        },
+        {
+          "img": "images/bible-lookup.svg"
+        }
+      ],
+      [
+        {
+          "en": "Enter each item in the meeting lead (except for videos) like this.",
+          "zh": "每一个流程(除了视频)都可这样输入。"
+        }
+      ],
+      [
+        {
+          "en": "Click 'New Media', select subtype Youtube, enter the video ID, and click save. Youtube video IDs are an 11 character string you will find in the link.",
+          "zh": "按'New Media'，选择Youtube和输入视频骗号，按save。Youtube视频骗号是链接里面一串11个字母。"
+        },
+        {
+          "textarea": "https://www.youtube.com/watch?v=gAcJPhD4yzE -> gAcJPhD4yzE\nhttps://youtu.be/-MHJvXJPp70?si=DJqP5kBOB2eycGU9 -> -MHJvXJPp70"
+        }
+      ],
+      [
+        {
+          "en": "Enter each video in the meeting lead like this.",
+          "zh": "每一个视频都可这样输入。"
+        }
+      ],
+      [
+        {
+          "en": "At the top of the screen, save the playlist. Choose save locally unless you have an agreement with me to use cloud saving. Save the .txt file to your USB to take to church.",
+          "zh": "在上方，按保存。除非我同意给你用云盘，选择save locally。保存到你的U盘，拿去教堂。"
+        },
+        { "img": "images/save.svg" }
+      ]
+    ]
+  },
+  "powerpoint-setup": {
+    "title_en": "",
+    "title_zh": "",
+    "steps": [
+      [
+        {
+          "en": "Download the template below. This will open in Google Slides, click File > Download > .pptx to edit in PowerPoint",
+          "zh": "下载以下的样板。这链接会用开Google Slides打开，按File > Download > .pptx 来下载，就可以用PowerPoint打开。"
+        },
+        {
+          "link": "https://docs.google.com/presentation/d/12gfSjLMqUyHYQi8Xq7bLiE8S9zKCf-4I/edit?usp=sharing&ouid=105447620885912422609&rtpof=true&sd=true"
+        }
+      ],
+      [
+        {
+          "en": "Make each slide according to the meeting lead. Note there are premade slides under the new slide dropdown.",
+          "zh": "根据流程来做每一个幻灯片。创新幻灯片的菜单有做好的模板。"
+        },
+        { "img": "images/powerpoint-setup.png" }
+      ],
+      [
+        {
+          "en": "When you are finished, save to your USB to transfer it to the church computer.",
+          "zh": "做完时，保存到你的U盘，拿去教堂。"
+        }
+      ]
+    ]
+  },
+  "turn-on": {
+    "title_en": "Turning everything on",
+    "title_zh": "开机",
+    "steps": [
+      [
+        {
+          "en": "Turn on the power board by flicking the switch. A green light should turn on.",
+          "zh": "开拖板的开关。一个绿灯会亮。"
+        },
+        { "img": "images/powerboard.jpg" }
+      ],
+      [
+        {
+          "en": "Turn on the computer, wireless microphone receiver and amplifier. The receiver and amplifier may already be on, and you can leave them like that, just I sometimes turn them off out of habit.",
+          "zh": "开电脑，无线麦接收器和放大器。 接收器和放大器可能已经开了，其实不需要关的，只是我有时会顺手将它们关了。"
+        },
+        {
+          "img": "images/power-switches.png",
+          "overlay": "images/power-switches.svg"
+        }
+      ],
+      [
+        {
+          "en": "Turn on the computer, wireless microphone receiver and amplifier. The receiver and amplifier may already be on, and you can leave them like that, just I sometimes turn them off out of habit.",
+          "zh": "开电脑，无线麦接收器和放大器。 接收器和放大器可能已经开了，其实不需要关的，只是我有时会顺手将它们关了。"
+        },
+        { "img": "images/power-switches.png" }
+      ],
+      [
+        {
+          "en": "Turn on the mixer by flicking the TWO switches on the back. The circled lights will turn on. ",
+          "zh": "开调音台后面的两个开关。这两个灯将亮起。"
+        },
+        { "img": "images/mixer-power.png" }
+      ],
+      [
+        {
+          "en": "If required, turn on the TV by touching the power button or using the remote.",
+          "zh": "如果需要，莫一下电视的开关。"
+        }
+      ],
+      [
+        {
+          "en": "Turn on the computer monitor by pressing the right-most button. The light next to this button will turn on. ",
+          "zh": "按电脑屏幕的开关。旁边的灯会亮。"
+        },
+        { "img": "images/monitor-power.jpg" }
+      ],
+      [
+        {
+          "en": "Turn on the projector. There is a rod near the drum set if you can’t reach.",
+          "zh": "开投影机。如果你不够高，鼓旁边有一条棍。"
+        },
+        {
+          "img": "images/projector.png",
+          "overlay": "images/projector-source.svg"
+        }
+      ]
+    ]
+  },
+  "tv-connect": {
+    "title_en": "Connecting the TV",
+    "title_zh": "链接电视",
+    "steps": [
+      [
+        {
+          "en": "If not already, open Google Chrome.",
+          "zh": "如没开，打开Google Chrome浏览器。"
+        }
+      ],
+      [
+        {
+          "en": "Click the cast button in the top right corner, then cast screen and Hall TV.",
+          "zh": "在浏览器的右上方按cast(投掷)按钮。在sources(来源)选择screen(屏幕), 然后按Hall TV。"
+        },
+        { "img": "images/chromecast1.png" }
+      ],
+      [
+        {
+          "en": "Select Screen 2, turn off share system audio and share.",
+          "zh": "选择Screen 2(第二屏幕)，关掉share system audio (分享系统声音) 然后 按share(分享)。"
+        },
+        { "img": "images/chromecast2.png" }
+      ]
+    ]
+  },
+  "powerpoint-usage": {
+    "title_en": "Playing a PowerPoint",
+    "title_zh": "播放PowerPoint",
+    "steps": [
+      [
+        {
+          "en": "Note: We use LibreOffice Impress instead of PowerPoint on the church computer. It works very similarly to PowerPoint and can open slideshows created in PowerPoint.",
+          "zh": "注备：教堂的电脑是用LibreOffice Impress 代替PowerPoint。Impress操作和PowerPoint很像的；它可以打开和播放在PowerPoint做的文件。"
+        }
+      ],
+      [
+        {
+          "en": "Find your PowerPoint (.pptx) file in file explorer. ",
+          "zh": "在文件管理器找你的PowerPoint (.pptx) 文件。"
+        }
+      ],
+      [
+        {
+          "en": "Double click on it to open. ",
+          "zh": "双击来打开。"
+        }
+      ],
+      [
+        {
+          "en": "Press F5 (or from the ribbon click Slide Show > Start From First Slide) to open the slideshow.",
+          "zh": "按F5 （或在菜单里按 Slide Show > Start From First Slide）来开始播放。"
+        }
+      ],
+      [
+        {
+          "en": "Use the left/right arrow keys (or the buttons) to change slides. ",
+          "zh": "用左右键来翻页。"
+        }
+      ]
+    ]
+  },
+  "church-presenter-usage": {
+    "title_en": "Using Church Presenter",
+    "title_zh": "用Church Presenter",
+    "steps": [
+      [
+        {
+          "en": "Make sure the computer is in extend mode. The image on the projector should be different to the monitor. If not, press Win + P and set click extend.",
+          "zh": "确定电脑在extend模式。投影的图像应该不对显示器的图像。如对的话，按Win + P和按extend"
+        },
+        { "img": "images/project-options.png" }
+      ],
+      [
+        {
+          "en": "Double click the Church Presenter icon on the desktop. Do not use Church Presenter (Offline).",
+          "zh": "双击桌面上的Church Presenter图标。不要用 Church Presenter (Offline)。"
+        },
+        { "img": "images/church-presenter.ico" }
+      ],
+      [
+        {
+          "en": "Click the open icon. Select where you file is (cloud or computer) and the file name.",
+          "zh": "按打开标志，选择local file (从电脑) 或 from cloud (从云盘)，选择文件名。"
+        },
+        { "img": "images/open-menu.png" }
+      ],
+      [
+        {
+          "en": "Click the open slideshow button then click “FULLSCREEN” in the bottom right",
+          "zh": "按 打开投影窗口 按钮，然后在窗口的右下方，按FULLSCREEN。"
+        },
+        { "img": "images/open-slideshow.svg" }
+      ],
+      [
+        {
+          "en": "Change slides by using the arrow keys or by clicking the slides in the playlist. A slide or subslide is highlighted in red when it is showing.\nSimilarly, select media by clicking, use the buttons at the bottom to play/pause/stop. Press ⏹ then ⏯ to restart videos.\nUse the selector on the right to choose between showing slides, media or nothing.",
+          "zh": "用上下键（或鼠标按）来选择影片。现在显示的页会有一个红色边界。\n同样，用鼠标来选择媒体，用下方的按钮来放、暂停和停。按⏹ 然后 ⏯可以从头播放。\n用右边的按钮来选择显示slide (影片), media (媒体) 或 blank (空白)。"
+        },
+        { "img": "images/church-presenter-ui.png" }
+      ],
+      [
+        {
+          "en": "Click “Setup” and select the projector screen so you can see the slides on your screen too.",
+          "zh": "按 “Setup” / “打开预览“ 和 选择第二屏幕。"
+        },
+        { "img": "images/preview-setup.png" }
+      ]
+    ]
+  },
+  "play-video": {
+    "title_en": "Playing a video from USB",
+    "title_zh": "从USB放视频",
+    "steps": [
+      [
+        {
+          "en": "Press ⊞Win + P and select duplicate.",
+          "zh": "按 ⊞Win + P 然后选择duplicate。"
+        },
+        { "img": "images/project-options.png" }
+      ],
+      [
+        {
+          "en": "Plug in your USB to the front of the computer.",
+          "zh": "在电脑前面插入你的USB。"
+        }
+      ],
+      [
+        {
+          "en": "File explorer should open automatically. If it doesn’t, click the explorer icon in the taskbar, go to “My Computer” and click on your drive.",
+          "zh": "如果文件管理器没有开，去This PC (我的电脑)找你的USB。"
+        },
+        {
+          "img": "images/file-explorer.png"
+        }
+      ],
+      [
+        {
+          "en": "Double click on the video you want to play.",
+          "zh": "双击你要播放的视频。"
+        }
+      ],
+      [
+        {
+          "en": "Click the play/pause button as required.",
+          "zh": "要的时候可以击播放/暂停按钮。"
+        }
+      ],
+      [
+        {
+          "en": "Adjust the mixer so that it looks like the picture below. The slider labelled “11/12” controls the volume of the computer.",
+          "zh": "调整调音台，使其如下图所示。 标有“11/12”的滑块控制电脑的音量。"
+        },
+        { "img": "images/mixer-computer.jpg" }
+      ]
+    ]
+  },
+  "turn-off": {
+    "title_en": "Turning everything off",
+    "title_zh": "关机",
+    "steps": [
+      [
+        {
+          "en": "Turn off the projector by pressing the same button TWICE. (It will display a message telling you to press it again after you press it once)",
+          "zh": "在投影机按一样的按钮两次。(按了一次会开一个提醒叫你按多一次)"
+        },
+        { "img": "images/projector.png" }
+      ],
+      [
+        {
+          "en": "Turn off the computer by opening the start menu, clicking the power icon, then clicking “Shut down”. (You can also click “Update and shut down” if shown - it will just take a bit longer to shut down, but you don’t need to wait for it to shut down before you leave).",
+          "zh": "打开电脑的Start (开始) 菜单，按底下的标志，按“Shut down” (关机)。如果有的话，还可以按 “Update and shut down” (更新和关机)。更新有可能要一点时间，不过你不用等它关机。"
+        },
+        { "img": "images/shutdown.png" }
+      ],
+      [
+        {
+          "en": "Turn off everything else in the same way you turned it on. ",
+          "zh": "关所有其它设备。"
+        }
+      ]
+    ]
+  },
+  "chromecast-error": {
+    "title_en": "When connecting via Chromecast as described above, it shows “available for selected programs only” and doesn’t let you select a screen",
+    "title_zh": "用Chromecast 来链接时，显示“available for selected programs only”和选不到投掷屏幕",
+    "steps": [
+      [
+        {
+          "en": "This is a known issue that I don’t know how to fix. Try reopening Google Chrome or restarting the Chromecast by pulling and reinserting the white USB cable shown below.",
+          "zh": "这是一个已知问题，我不知道如何解决。 尝试重新打开 Google Chrome 或通过拔出并重新插入如下所示的白色 USB 电缆来重新启动 Chromecast。"
+        },
+        {
+          "img": "images/power-switches.png",
+          "overlay": "images/chromecast-power.svg"
+        }
+      ]
+    ]
+  },
+  "projector-error": {
+    "title_en": "Projector shows 'No signal on input ___'",
+    "title_zh": "投影机显示没信号",
+    "steps": [
+      [
+        {
+          "en": "You have the wrong input selected, this happens when you bump the wrong button when trying to turn the projector off. Keep pressing on the input button until you get back to the correct one (RGB1).",
+          "zh": "投影机的输入错了，有时是应为关机时按错了旁边的按钮。你要重复的按输入键回到RGB1输入。"
+        },
+        {
+          "img": "images/projector.png",
+          "overlay": "images/projector-source.svg"
+        }
+      ]
+    ]
+  },
+  "monitor-error": {
+    "title_en": "No signal on monitor, but projector is working",
+    "title_zh": "屏幕没信号，不过投影机有信号",
+    "steps": [
+      [
+        {
+          "en": "Known issue. Pull the DisplayPort cable out of the computer and immediately plug it back in. Note this cable has a retention mechanism, so you must push down the button to pull it out. Wait a few seconds for the computer to recognise it. You may need to repeat this a few times.",
+          "zh": "常见问题。在电脑后面拔出以下圈的线，然后再插进去。注意这条线有一个按钮，要按下才可以拔出来。插了有时要等几秒先会有信号。如果还不行，有可能要重复几次。"
+        },
+        {
+          "img": "images/computer-back.png",
+          "overlay": "images/displayport.svg"
+        }
+      ]
+    ]
+  },
+  "internet-error": {
+    "title_en": "No internet",
+    "title_zh": "没网络",
+    "steps": [
+      [
+        {
+          "en": "Turn the router off, wait a few seconds and turn on again.",
+          "zh": "关掉路由器，等几秒，再开。"
+        },
+        { "img": "images/router.png", "overlay": "images/router-power.svg" },
+        {
+          "en": "Also try disconnecting and reconnecting the blue network cable at the back of the computer.",
+          "zh": "还可以试拔出电脑后面的蓝色网络线，再插。"
+        },
+        {
+          "img": "images/computer-back.png",
+          "overlay": "images/computer-ethernet.svg"
+        }
+      ]
+    ]
+  },
+  "no-sound-any": {
+    "title_en": "No sound on any input",
+    "title_zh": "没网络",
+    "steps": [
+      [
+        {
+          "en": "Check the following: ",
+          "zh": "检查："
+        },
+        {
+          "en": "* Main mix is slid up",
+          "zh": "* Windows的音量已调到100。"
+        }
+      ],
+      [
+        {
+          "en": "* Mixer is turned on",
+          "zh": "* 在调音台，11/12频道的音量滑块已滑上"
+        }
+      ],
+      [
+        {
+          "en": "* Amplifier is turned on",
+          "zh": "* 在调音台，11/12频道没有静音"
+        }
+      ]
+    ]
+  },
+  "no-sound-wired": {
+    "title_en": "No sound on wired microphone",
+    "title_zh": "有线麦没声",
+    "steps": [
+      [
+        {
+          "en": "Check the following: \n* Microphone is plugged in to a channel between 1-6\n* Volume slider is slid up on the corresponding channel in the mixer\n* Turn up the gain (slowly!) on the corresponding channel in the mixer\n* Channel is not muted on the mixer",
+          "zh": "检查：\n* 麦已插进1-6 之间的端口\n* 在调音台，对应的频道的音量滑块已滑上\n* 在调音台，慢慢的加对应的频道的增益\n* 在调音台，对应的频道没有静音"
+        }
+      ]
+    ]
+  },
+  "no-sound-wireless": {
+    "title_en": "No sound on wireless microphone",
+    "title_zh": "无线麦没声",
+    "steps": [
+      [
+        {
+          "en": "Check the following: \n* When microphone is turned on, the red light turns on briefly\n* Wireless receiver is turned on\n* Volume slider is slid up on channel 3 in the mixer\n* Channel 3 is not muted on the mixer",
+          "zh": "检查：\n* 开话筒时，红灯有亮一下\n* 接收器已开了\n* 在调音台，3频道的音量滑块已滑上\n* 在调音台，3频道没有静音"
+        }
+      ]
+    ]
+  },
+  "gain-too-high": {
+    "title_en": "Microphone is popping or making weird noise",
+    "title_zh": "麦有砰砰声或其他噪音",
+    "steps": [
+      [
+        {
+          "en": "Turn the gain knob down (and volume up if needed).",
+          "zh": "在调音台，减小对应的频道的增益。如音量不够，滑上音量滑块。"
+        }
+      ]
+    ]
+  },
+  "no-sound-computer": {
+    "title_en": "No sound on computer",
+    "title_zh": "电脑没声",
+    "steps": [
+      [
+        {
+          "en": "Check the following: ",
+          "zh": "检查："
+        },
+        {
+          "en": "* Volume slider is turned up in Windows to 100.",
+          "zh": "* Windows的音量已调到100。"
+        },
+        { "img": "images/computer-volume.png" },
+        {
+          "en": "* Volume slider is slid up on channel 11/12 in the mixer",
+          "zh": "* 在调音台，11/12频道的音量滑块已滑上"
+        },
+        {
+          "en": "* Channel 11/12 is not muted",
+          "zh": "* 在调音台，11/12频道没有静音"
+        }
+      ]
+    ]
+  }
+}

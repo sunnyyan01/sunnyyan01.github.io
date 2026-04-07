@@ -1,0 +1,97 @@
+body {
+    font-family: system-ui;
+    background-color: #292c79;
+    color: white;
+}
+
+a {
+    color: white;
+}
+
+body[data-lang="en"] .zh {
+    display: none;
+}
+body[data-lang="zh"] .en {
+    display: none;
+}
+
+body[data-lang="en"] #lang-sel-en, body[data-lang="zh"] #lang-sel-zh {
+    background-color: #fff;
+    color: #292c79;
+    opacity: 1;
+}
+
+.toggle-button-group {
+    display: inline flex;
+    flex-direction: row;
+    margin-left: 10px;
+}
+.toggle-button-group .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    opacity: .7;
+    padding: 10px;
+    transition: all .1s ease-in-out;
+
+    border: 1px solid white;
+    border-radius: 0;
+    margin: 0;
+    width: 80px;
+    height: 25px;
+}
+.toggle-button-group .button:first-child {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+.toggle-button-group .button:last-child {
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.toggle-button-group .button:hover {
+    background-color: #fff;
+    color: #292c79;
+    opacity: .7;
+}
+
+.section {
+    border: 1px solid white;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px 0px;
+    cursor: pointer;
+}
+.section h2, .section p {
+    margin: 0px;
+}
+.title {
+    position: relative;
+}
+.expand-button {
+    position: absolute;
+    top: 50%;
+    right: 0px;
+    transform: translateY(-50%);
+
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+}
+.section[data-expanded=false] .chapters {
+    display: none;
+}
+.section[data-expanded=true] > p {
+    display: none;
+}
+
+.chapters a {
+    display: block;
+    margin: 5px;
+}
+.chapters a:hover {
+    text-decoration: underline;
+}
+.chapters a::after {
+    content: ">";
+}
