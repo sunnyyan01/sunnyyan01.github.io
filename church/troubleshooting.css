@@ -1,0 +1,79 @@
+body {
+    font-family: system-ui;
+    background-color: #292c79;
+    color: white;
+}
+
+body[data-lang="en"] .zh {
+    display: none;
+}
+body[data-lang="zh"] .en {
+    display: none;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.button {
+    display: inline-flex;
+    border: 1px solid white;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: all 0.1s ease-in-out;
+    text-align: center;
+}
+.button:hover {
+    opacity: 1;
+}
+.button p {
+    margin: 0px;
+}
+
+#list-buttons, #option-buttons, #content-buttons {
+    display: none;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+    margin-top: 10px;
+}
+
+main[data-page-type=content] #content-buttons {
+    display: flex;
+}
+main[data-page-type=options] #option-buttons {
+    display: flex;
+}
+main[data-page-type=list] #list-buttons {
+    display: flex;
+}
+
+div.image {
+    position: relative;
+}
+img {
+    max-width: 100%;
+    max-height: 60vh;
+    object-fit: contain;
+}
+img.overlay {
+    position: absolute;
+    left: 0px;
+    object-fit: cover;
+    z-index: 2;
+}
+
+.subpage {
+    display: none;
+}
+.subpage.show {
+    display: unset;
+}
+main[data-page-type=normal] .subpage {
+    display: unset;
+}

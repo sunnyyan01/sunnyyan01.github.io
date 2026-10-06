@@ -1,0 +1,190 @@
+{
+    "main-menu": {
+        "text": ["What is the nature of the problem?", "是怎么样的问题？"],
+        "options": [
+            ["No sound", "没声音", "no-sound-menu"],
+            ["Popping or weird noise", "砰砰声或其他噪音", "gain-too-high"],
+            ["TV will not connect", "电视无法连接", "chromecast-error"],
+            ["Projector shows no signal", "投影机没信号", "projector-no-signal"],
+            ["Monitor shows no signal", "屏幕没信号", "monitor-no-signal"],
+            ["Computer shows no internet", "没网络", "no-internet"]
+        ]
+    },
+    "no-sound-menu": {
+        "text": [
+            "Try making a sound on another input. Which input(s) does this problem affect?",
+            "试一下其它输入。是那个输入没声？"
+        ],
+        "options": [
+            ["Microphone", "话筒", "no-audio-microphone"],
+            ["Computer", "电脑", "no-audio-computer"],
+            ["All of them", "所有输入", "no-audio-all"]
+        ]
+    },
+    "no-audio-all": {
+        "text": ["Try the following:", "请试："],
+        "list": [
+            "wall-outlet",
+            "powerboard1",
+            "amplifier-power",
+            "mixer-power",
+            "mixer-main-mix"
+        ]
+    },
+    "wall-outlet": {
+        "text": [
+            "Check that all 3 power plugs are fully plugged in and both sockets are turned on.",
+            "检查三个插头己插好，两个开关已开。"
+        ],
+        "img": ""
+    },
+    "powerboard1": {
+        "text": [
+            "Check that Powerboard 1 is turned on. The green light should be lit.",
+            "检查这个插线板已开。绿灯应该亮起。"
+        ],
+        "img": "powerboard.jpg"
+    },
+    "amplifier-power": {
+        "text": [
+            "Check that the amplifier is turned on. The red light should be lit.",
+            "检查放大器已开。红灯应该亮起。"
+        ],
+        "img": "power-switches.png",
+        "overlay": "amplifier-power.svg"
+    },
+    "mixer-power": {
+        "text": [
+            "Check that the mixer is turned on. The red and blue lights should be lit.",
+            "检查调音台已开。红和蓝灯应该亮起。"
+        ],
+        "img": "mixer-power.png"
+    },
+    "mixer-main-mix": {
+        "text": [
+            "Check the main mix slider is up on the mixer.",
+            "检查总音量滑块已滑起。"
+        ],
+        "img": "mixer-main-mix.png"
+    },
+    "no-audio-microphone": {
+        "text": ["Try the following:", "请试："],
+        "list": [
+            "microphone-cable",
+            "mixer-microphone-vol",
+            "mixer-gain",
+            "mixer-microphone-mute"
+        ]
+    },
+    "microphone-cable": {
+        "text": [
+            "Check the microphone cable is plugged securely at both ends. It should be connected to socket 1-6.",
+            "检查话筒线两边都插好。在墙上应该用1到6插口。"
+        ]
+    },
+    "mixer-microphone-vol": {
+        "text": [
+            "Check the corresponding channel's volume is turned up.",
+            "在调音台，检查对应频道的音量已滑起。"
+        ]
+    },
+    "mixer-gain": {
+        "text": [
+            "Slowly turn up the gain by spinning the knob clockwise on the corresponding channel.",
+            "慢慢顺时针转起对应频道的增益。"
+        ]
+    },
+    "mixer-microphone-mute": {
+        "text": [
+            "Make sure the corresponding channel is not muted",
+            "检查对应的频道没有按下静音。"
+        ]
+    },
+    "no-audio-computer": {
+        "text": ["Try the following:", "请试："],
+        "list": [
+            "computer-volume",
+            "mixer-computer-vol",
+            "mixer-computer-mute"
+        ]
+    },
+    "computer-volume": {
+        "text": [
+            "Check the computer volume is turned up to 100 and not muted.",
+            "电脑的音量已调到100，没有静音。"
+        ],
+        "img": "computer-volume.png"
+    },
+    "mixer-computer-vol": {
+        "text": [
+            "Check the channel 11/12's volume is turned up.",
+            "检查调音台的11/12频道音量已滑起。"
+        ]
+    },
+    "mixer-computer-mute": {
+        "text": [
+            "Make sure channel 11/12 is not muted",
+            "检查11/12频道没有按下静音。"
+        ]
+    },
+    "gain-too-high": {
+        "text": [
+            "Turn down the gain by spinning the knob anticlockwise on the microphone that is making the noise.",
+            "逆时针转对应频道的增益。"
+        ],
+        "img": ""
+    },
+    "chromecast-error": {
+        "text": ["Try the following:", "请试："],
+        "list": [
+            "cp-restart",
+            "chromecast-restart",
+            "computer-time"
+        ]
+    },
+    "cp-restart": {
+        "text": [
+            "Close the browser window and reopen with the Church Presenter icon",
+            "关掉浏览器，然后双击桌面上的Church Presenter图标来重启。"
+        ],
+        "img": "church-presenter.ico"
+    },
+    "chromecast-restart": {
+        "text": [
+            "Pull the indicated USB cable and reinsert",
+            "拔出并重新插入如下所示的白色 USB 电缆。"
+        ],
+        "img": "power-switches.png",
+        "overlay": "chromecast-power.svg"
+    },
+    "computer-time": {
+        "text": [
+            "Check the time in the bottom right corner of the screen is correct. If it isn't, right click on it then 'adjust date/time' and 'sync now'.",
+            "检查电脑的时间正确。如不对，右键单击，选择adjust date/time，按sync now来自动调时间。"
+        ],
+        "img": ""
+    },
+    "projector-no-signal": {
+        "text": [
+            "You have the wrong input selected, this happens when you bump the wrong button when trying to turn the projector off. Keep pressing on the input button until you get back to the correct one (RGB1).",
+            "投影机的输入错了，有时是应为关机时按错了旁边的按钮。你要重复的按输入键回到RGB1输入。"
+        ],
+        "img": "projector.png",
+        "overlay": "projector-source.svg"
+    },
+    "monitor-no-signal": {
+        "text": [
+            "Pull the DisplayPort cable out of the computer and immediately plug it back in. Note this cable has a retention mechanism, so you must push down the button to pull it out. Wait a few seconds for the computer to recognise it. You may need to repeat this a few times.",
+            "在电脑后面拔出以下圈的线，然后再插进去。注意这条线有一个按钮，要按下才可以拔出来。插了有时要等几秒先会有信号。如果还不行，有可能要重复几次。"
+        ],
+        "img": "computer-back.png",
+        "overlay": "displayport.svg"
+    },
+    "no-internet": {
+        "text": [
+            "Turn the router off, wait a few seconds and turn on again.\nAlso try disconnecting and reconnecting the blue network cable at the back of the computer.",
+            "关掉路由器，等几秒，再开。\n还可以试拔出电脑后面的蓝色网络线，再插。"
+        ],
+        "img": ""
+    }
+}
