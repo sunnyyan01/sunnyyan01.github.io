@@ -1,0 +1,12 @@
+body {
+    font-family: system-ui;
+    background-color: #292c79;
+    color: white;
+}
+
+body[data-lang="en"] .zh {
+    display: none;
+}
+body[data-lang="zh"] .en {
+    display: none;
+}

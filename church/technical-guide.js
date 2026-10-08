@@ -4,17 +4,22 @@ function changeLanguage(lang) {
 }
 
 function updateLinks() {
+    let lang = document.body.dataset.lang;
     for (let a of document.querySelectorAll(".chapters a")) {
-        let params = new URLSearchParams({
-            lang: document.body.dataset.lang,
-            chapter: a.id,
-        })
-        a.href = "technical-guide-chapter.html?" + params.toString();
+        if (a.parentElement.parentElement.id == "step-by-step") {
+            let params = new URLSearchParams({
+                lang,
+                chapter: a.id,
+            })
+            a.href = "technical-guide-chapter.html?" + params.toString();
+        } else if (a.parentElement.parentElement.id == "technical-details") {
+            a.href = `details/${a.id}.html?lang=${lang}`;
+        }
     }
 }
 
 function onSectionClick(e) {
-    if (e.currentTarget.dataset.sectionName == "troubleshooting") {
+    if (e.currentTarget.id == "troubleshooting") {
         window.location = `troubleshooting.html?lang=${document.body.dataset.lang}`;
         return;
     }
